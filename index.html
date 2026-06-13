@@ -1,45 +1,161 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" id="htmlRoot">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>عين المغرب | ننقل الخبر بسرعة ومصداقية</title>
-<meta name="description" content="عين المغرب - بوابتك الإخبارية الشاملة لأخبار المغرب والعالم"/>
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<title>مشهد اليوم | ننقل الخبر بسرعة ومصداقية</title>
+<meta name="description" content="مشهد اليوم - بوابتك الإخبارية الشاملة لأخبار المغرب والعالم"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
 :root{
---red:#C8102E;--red-dark:#9B0C23;--red-light:#E8192E;
---black:#111;--dark:#1C1C1C;--dark2:#0D1B2A;--dark3:#162032;
---gray:#555;--gray-light:#888;--border:#E0E0E0;
---bg:#F2F4F7;--white:#FFFFFF;--blue-dark:#0D2B45;--gold:#D4A017;
---navy:#0D1B2A;--navy2:#162032;--navy3:#1E3A5F;
---font-main:'Cairo','Tajawal',sans-serif;
---shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-md:0 4px 20px rgba(0,0,0,0.14);
---radius:4px;--radius-md:8px;--radius-lg:14px;
+  --red:#C8102E;--red-dark:#9B0C23;--red-light:#E8192E;
+  --black:#111;--dark:#1C1C1C;--dark2:#0D1B2A;--dark3:#162032;
+  --gray:#555;--gray-light:#888;--border:#E0E0E0;
+  --bg:#F2F4F7;--white:#FFFFFF;--blue-dark:#0D2B45;--gold:#D4A017;
+  --navy:#0D1B2A;--navy2:#162032;--navy3:#1E3A5F;
+  --font-main:'Cairo','Tajawal',sans-serif;
+  --shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-md:0 4px 20px rgba(0,0,0,0.14);
+  --radius:4px;--radius-md:8px;--radius-lg:14px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:var(--font-main);background:var(--bg);color:var(--dark);direction:rtl;text-align:right;line-height:1.6;font-size:15px;overflow-x:hidden;}
 body.dark{--bg:#0f0f0f;--white:#1a1a1a;--dark:#e8e8e8;--dark2:#111;--border:#2a2a2a;--gray-light:#666;--gray:#999;}
-body.dark .site-header,body.dark .breaking-bar+*{background:#1a1a1a!important;}
+body.dark .site-header{background:#1a1a1a!important;}
 body.dark .news-card,body.dark .sub-card,body.dark .section-white,body.dark .sidebar-widget,body.dark .opinion-card,body.dark .list-card-body{background:#1e1e1e!important;}
 a{text-decoration:none;color:inherit;cursor:pointer;}
 img{max-width:100%;display:block;}
 ul{list-style:none;}
 .container{max-width:1300px;margin:0 auto;padding:0 16px;}
 
-/* ANIMATED BG */
-.bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:hidden;}
-.bg-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.04;animation:orbFloat 18s ease-in-out infinite;}
-.bg-orb:nth-child(1){width:600px;height:600px;background:var(--red);top:-200px;right:-200px;animation-duration:20s;}
-.bg-orb:nth-child(2){width:500px;height:500px;background:#1E3A5F;bottom:-200px;left:-200px;animation-duration:25s;animation-delay:-8s;}
-.bg-orb:nth-child(3){width:400px;height:400px;background:var(--gold);top:50%;left:30%;animation-duration:30s;animation-delay:-15s;}
-@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-40px) scale(1.05);}66%{transform:translate(-20px,20px) scale(0.95);}}}
+/* ============================================================
+   ANIMATED LIVE BACKGROUND - News/Breaking News Themed
+   ============================================================ */
+#bgCanvas{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  z-index:-2;pointer-events:none;
+}
+
+/* Breaking news line effects */
+.bg-news-lines{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  z-index:-1;pointer-events:none;overflow:hidden;
+}
+.bg-news-line{
+  position:absolute;
+  height:1px;width:100%;
+  background:linear-gradient(90deg,transparent 0%,rgba(200,16,46,0.08) 30%,rgba(200,16,46,0.18) 50%,rgba(200,16,46,0.08) 70%,transparent 100%);
+  animation:newsLineSweep linear infinite;
+}
+@keyframes newsLineSweep{
+  0%{transform:translateX(-200%);opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:0.7;}
+  100%{transform:translateX(200%);opacity:0;}
+}
+
+/* Radar / pulse rings for "breaking" feel */
+.bg-radar{
+  position:fixed;pointer-events:none;z-index:-1;
+}
+.bg-radar-ring{
+  position:absolute;border-radius:50%;border:1px solid rgba(200,16,46,0.06);
+  animation:radarPulse 6s ease-out infinite;
+  transform:translate(-50%,-50%);
+}
+@keyframes radarPulse{
+  0%{width:0;height:0;opacity:0.4;}
+  100%{width:800px;height:800px;opacity:0;}
+}
+
+/* Floating particles - like confetti/data points */
+.bg-particles{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  z-index:-1;pointer-events:none;overflow:hidden;
+}
+.particle{
+  position:absolute;
+  animation:particleFloat linear infinite;
+  opacity:0;
+}
+@keyframes particleFloat{
+  0%{transform:translateY(100vh) rotate(0deg);opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:0.5;}
+  100%{transform:translateY(-10vh) rotate(360deg);opacity:0;}
+}
+
+/* Gradient orbs */
+.bg-orb{
+  position:fixed;border-radius:50%;filter:blur(100px);
+  animation:orbFloat 20s ease-in-out infinite;pointer-events:none;z-index:-1;
+}
+.bg-orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(200,16,46,0.10) 0%,transparent 70%);top:-200px;right:-200px;animation-duration:22s;}
+.bg-orb2{width:600px;height:600px;background:radial-gradient(circle,rgba(13,43,69,0.15) 0%,transparent 70%);bottom:-150px;left:-150px;animation-duration:28s;animation-delay:-10s;}
+.bg-orb3{width:450px;height:450px;background:radial-gradient(circle,rgba(212,160,23,0.06) 0%,transparent 70%);top:40%;left:35%;animation-duration:35s;animation-delay:-18s;}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1);}
+  25%{transform:translate(40px,-50px) scale(1.06);}
+  50%{transform:translate(-30px,30px) scale(0.94);}
+  75%{transform:translate(20px,40px) scale(1.03);}
+}
+
+/* Subtle grid - newspaper grid feel */
+.bg-grid{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  z-index:-1;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(200,16,46,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,16,46,0.018) 1px, transparent 1px);
+  background-size:80px 80px;
+  animation:gridScroll 50s linear infinite;
+}
+@keyframes gridScroll{0%{background-position:0 0;}100%{background-position:80px 80px;}}
+
+/* ---- SEARCH BAR - clean, no red border frame ---- */
+.search-wrap{flex:1;max-width:420px;position:relative;}
+.search-form{
+  display:flex;align-items:center;
+  border:none;
+  border-radius:32px;
+  overflow:hidden;
+  transition:all .25s;
+  background:#f8f9fa;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08),inset 0 1px 3px rgba(0,0,0,0.05);
+}
+body.dark .search-form{
+  background:#2a2a2a;
+  box-shadow:0 2px 8px rgba(0,0,0,0.3),inset 0 1px 3px rgba(0,0,0,0.2);
+}
+.search-form:focus-within{
+  box-shadow:0 4px 20px rgba(0,0,0,0.12);
+  transform:translateY(-1px);
+  background:#fff;
+}
+body.dark .search-form:focus-within{background:#333;}
+.search-input{
+  flex:1;border:none;outline:none;
+  padding:10px 18px;
+  font-family:var(--font-main);font-size:13px;
+  background:transparent;direction:rtl;
+  color:var(--dark);min-width:0;
+}
+body.dark .search-input{color:#e8e8e8;}
+.search-input::placeholder{color:#bbb;}
+.search-btn{
+  background:none;border:none;
+  padding:10px 16px;
+  color:var(--gray-light);cursor:pointer;
+  font-size:16px;
+  transition:all .2s;
+  flex-shrink:0;
+  display:flex;align-items:center;
+}
+.search-btn:hover{color:var(--red);transform:scale(1.1);}
 
 /* BREAKING BAR */
 .breaking-bar{background:var(--red);color:#fff;padding:0;overflow:hidden;position:relative;z-index:100;height:36px;display:flex;align-items:center;}
@@ -70,32 +186,27 @@ ul{list-style:none;}
 .lang-option{display:flex;align-items:center;gap:8px;padding:8px 12px;color:#ccc;font-size:12px;cursor:pointer;transition:background .15s;}
 .lang-option:hover{background:#1E3A5F;color:#fff;}
 .lang-option.active{color:var(--red);}
-.dark-toggle,.admin-btn{background:none;border:1px solid #444;color:#ccc;padding:3px 8px;border-radius:3px;font-size:12px;cursor:pointer;transition:all .2s;}
-.dark-toggle:hover,.admin-btn:hover{border-color:var(--red);color:#fff;}
-.admin-btn{border-color:var(--gold);color:var(--gold);}
+.dark-toggle{background:none;border:1px solid #444;color:#ccc;padding:3px 8px;border-radius:3px;font-size:12px;cursor:pointer;transition:all .2s;}
+.dark-toggle:hover{border-color:var(--red);color:#fff;}
+.admin-btn{background:none;border:1px solid var(--gold);color:var(--gold);padding:3px 8px;border-radius:3px;font-size:12px;cursor:pointer;transition:all .2s;display:none;}
+.admin-btn:hover{background:var(--gold);color:#000;}
+.admin-btn.visible{display:inline-flex;align-items:center;gap:5px;}
 
 /* SITE HEADER */
 .site-header{background:#fff;box-shadow:0 2px 16px rgba(0,0,0,0.1);position:sticky;top:0;z-index:500;}
 body.dark .site-header{background:#1a1a1a!important;box-shadow:0 2px 16px rgba(0,0,0,0.4);}
 .header-main{display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:16px;}
 
-/* SVG LOGO */
+/* LOGO */
 .logo-wrap{display:flex;align-items:center;gap:10px;flex-shrink:0;cursor:pointer;}
-.logo-svg{width:52px;height:52px;flex-shrink:0;}
+.logo-svg-wrap{width:52px;height:52px;flex-shrink:0;background:linear-gradient(135deg,#0D1B2A 0%,#1E3A5F 100%);border-radius:10px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 3px 12px rgba(200,16,46,0.3);animation:logoPulse 4s ease-in-out infinite;}
+@keyframes logoPulse{0%,100%{box-shadow:0 3px 12px rgba(200,16,46,0.3);}50%{box-shadow:0 3px 20px rgba(200,16,46,0.55);}}
 .logo-text-block{line-height:1.2;}
-.logo-ar{font-size:21px;font-weight:900;color:var(--dark);line-height:1.1;}
+.logo-ar{font-size:22px;font-weight:900;color:var(--dark);line-height:1.1;letter-spacing:-0.5px;}
 .logo-ar span{color:var(--red);}
-.logo-en{font-size:9px;color:var(--gray-light);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+.logo-en{font-size:9px;color:var(--gray-light);letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
 .logo-tagline{font-size:10px;color:var(--gray-light);font-style:italic;}
-
-/* SEARCH */
-.search-wrap{flex:1;max-width:400px;position:relative;}
-.search-form{display:flex;align-items:center;border:2px solid var(--border);border-radius:28px;overflow:hidden;transition:border-color .2s;background:#fff;}
-body.dark .search-form{background:#2a2a2a;border-color:#333;}
-.search-form:focus-within{border-color:var(--red);}
-.search-input{flex:1;border:none;outline:none;padding:9px 16px;font-family:var(--font-main);font-size:13px;background:transparent;direction:rtl;color:var(--dark);min-width:0;}
-.search-btn{background:var(--red);border:none;padding:9px 16px;color:#fff;cursor:pointer;font-size:14px;transition:background .2s;flex-shrink:0;}
-.search-btn:hover{background:var(--red-dark);}
+body.dark .logo-ar{color:#e8e8e8;}
 
 /* HAMBURGER */
 .hamburger{display:none;background:none;border:none;color:var(--dark);font-size:22px;cursor:pointer;padding:6px;flex-shrink:0;}
@@ -231,7 +342,6 @@ body.dark .cat-section-list{background:#1e1e1e;}
 .cat-banner img{width:100%;height:100%;object-fit:cover;}
 .cat-banner-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding:28px 32px;background:linear-gradient(to left,rgba(0,0,0,0.75) 40%,transparent 100%);}
 .cat-banner-title{color:#fff;font-size:32px;font-weight:900;display:flex;align-items:center;gap:14px;}
-.cat-banner-desc{color:rgba(255,255,255,0.8);font-size:14px;margin-top:6px;}
 
 /* OPINION */
 .opinion-card{background:#fff;border-radius:var(--radius);padding:12px;box-shadow:var(--shadow);display:flex;gap:12px;margin-bottom:10px;cursor:pointer;transition:box-shadow .2s;}
@@ -254,7 +364,6 @@ body.dark .sidebar-widget{background:#1e1e1e;}
 .weather-city-selector{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
 .wcity-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:3px 9px;border-radius:20px;font-size:11px;cursor:pointer;transition:all .2s;font-family:var(--font-main);}
 .wcity-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
-.weather-city{font-size:14px;font-weight:700;margin-bottom:2px;}
 .weather-temp{font-size:50px;font-weight:900;line-height:1;}
 .weather-temp span{font-size:22px;}
 .weather-desc{font-size:13px;opacity:0.8;margin-bottom:10px;}
@@ -284,10 +393,12 @@ body.dark .sidebar-widget{background:#1e1e1e;}
 .comment-text{font-size:11px;color:var(--gray);line-height:1.5;margin-top:2px;}
 .comment-time{font-size:10px;color:var(--gray-light);margin-top:2px;}
 
-/* HESPRESS BADGE */
+/* SOURCE BADGES */
 .source-badge{font-size:9px;background:#e8f0fe;border:1px solid #c5d8f5;padding:2px 6px;border-radius:2px;color:#1a73e8;font-weight:700;}
 .source-badge.hespress{background:#fff3e0;border-color:#ffe0b2;color:#e65100;}
 .source-badge.maroc{background:#e8f5e9;border-color:#c8e6c9;color:#2e7d32;}
+.source-badge.goud{background:#f3e5f5;border-color:#ce93d8;color:#7b1fa2;}
+.source-badge.tele{background:#e3f2fd;border-color:#90caf9;color:#1565c0;}
 
 /* SCROLL TOP */
 .scroll-top{position:fixed;bottom:22px;left:22px;width:44px;height:44px;background:var(--red);color:#fff;border:none;border-radius:50%;font-size:15px;cursor:pointer;box-shadow:0 4px 20px rgba(200,16,46,0.4);display:none;align-items:center;justify-content:center;z-index:999;transition:all .2s;}
@@ -309,10 +420,10 @@ body.dark .sidebar-widget{background:#1e1e1e;}
 .article-body p{margin-bottom:14px;}
 .article-body h2,.article-body h3{font-weight:900;margin-bottom:10px;margin-top:18px;color:var(--dark);}
 
-/* SHARE */
+/* SHARE BUTTONS - Enhanced for real sharing */
 .article-share{display:flex;align-items:center;gap:8px;padding:14px 0;border-top:1px solid var(--border);margin-top:24px;flex-wrap:wrap;}
-.share-btn{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:var(--radius);font-family:var(--font-main);font-size:12px;font-weight:600;cursor:pointer;border:none;color:#fff;transition:opacity .2s;}
-.share-btn:hover{opacity:0.85;}
+.share-btn{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:var(--radius);font-family:var(--font-main);font-size:12px;font-weight:600;cursor:pointer;border:none;color:#fff;transition:all .2s;text-decoration:none;}
+.share-btn:hover{opacity:0.85;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.2);}
 .share-fb{background:#1877f2;}
 .share-tw{background:#1da1f2;}
 .share-wa{background:#25d366;}
@@ -321,8 +432,116 @@ body.dark .sidebar-widget{background:#1e1e1e;}
 .share-em{background:#555;}
 .share-cp{background:#555;color:#fff;}
 
-/* RELATED NEWS */
-.related-news{margin-top:28px;}
+/* ============================================================
+   ENHANCED WEATHER PAGE
+   ============================================================ */
+.weather-page-wrap{max-width:1100px;margin:0 auto;}
+.weather-hero{
+  background:linear-gradient(135deg,#0D2B45 0%,#1a4a7a 50%,#0e3a6e 100%);
+  border-radius:var(--radius-lg);
+  padding:32px;
+  color:#fff;
+  margin-bottom:20px;
+  position:relative;
+  overflow:hidden;
+}
+.weather-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 80% 20%,rgba(200,16,46,0.15) 0%,transparent 60%);
+  pointer-events:none;
+}
+.weather-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+.weather-main-temp{font-size:100px;font-weight:900;line-height:1;letter-spacing:-4px;}
+.weather-main-temp sup{font-size:40px;vertical-align:top;margin-top:16px;}
+.weather-main-city{font-size:22px;font-weight:700;margin-bottom:4px;}
+.weather-main-desc{font-size:16px;opacity:0.8;margin-bottom:16px;}
+.weather-main-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.weather-stat-box{background:rgba(255,255,255,0.1);border-radius:10px;padding:12px;text-align:center;backdrop-filter:blur(4px);}
+.weather-stat-val{font-size:20px;font-weight:900;}
+.weather-stat-lbl{font-size:10px;opacity:0.7;margin-top:2px;}
+.weather-city-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.weather-city-tab{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.7);
+  padding:8px 18px;border-radius:24px;
+  font-size:13px;cursor:pointer;
+  transition:all .2s;font-family:var(--font-main);font-weight:600;
+}
+.weather-city-tab.active{background:var(--red);border-color:var(--red);color:#fff;}
+.weather-city-tab:hover:not(.active){background:rgba(255,255,255,0.15);color:#fff;}
+
+/* 7-day forecast strip */
+.forecast-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:20px;}
+.forecast-day-card{
+  background:rgba(255,255,255,0.08);
+  border-radius:10px;padding:12px 8px;
+  text-align:center;cursor:pointer;
+  border:2px solid transparent;
+  transition:all .2s;
+}
+.forecast-day-card:hover,.forecast-day-card.active{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.35);}
+.forecast-day-name{font-size:11px;opacity:0.7;margin-bottom:4px;}
+.forecast-day-icon{font-size:24px;margin:4px 0;}
+.forecast-max{font-size:16px;font-weight:800;}
+.forecast-min{font-size:12px;opacity:0.6;}
+
+/* Hourly forecast */
+.hourly-scroll{
+  display:flex;gap:8px;
+  overflow-x:auto;padding-bottom:8px;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,0.2) transparent;
+}
+.hourly-item{
+  background:rgba(255,255,255,0.08);
+  border-radius:10px;
+  padding:10px 12px;
+  text-align:center;
+  flex-shrink:0;min-width:70px;
+}
+.hourly-time{font-size:11px;opacity:0.7;}
+.hourly-icon{font-size:20px;margin:4px 0;}
+.hourly-temp{font-size:15px;font-weight:700;}
+
+/* Weather detail cards */
+.weather-detail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.weather-detail-card{
+  background:#fff;border-radius:var(--radius-md);
+  padding:16px;box-shadow:var(--shadow);
+  text-align:center;
+}
+body.dark .weather-detail-card{background:#1e1e1e;}
+.wdc-icon{font-size:28px;margin-bottom:8px;}
+.wdc-val{font-size:22px;font-weight:900;color:var(--dark);}
+.wdc-lbl{font-size:12px;color:var(--gray);margin-top:4px;}
+.wdc-sub{font-size:11px;color:var(--gray-light);margin-top:2px;}
+
+/* UV index bar */
+.uv-bar{height:8px;border-radius:4px;background:linear-gradient(to right,#4caf50,#ffeb3b,#ff9800,#f44336,#9c27b0);margin:6px 0;position:relative;}
+.uv-indicator{position:absolute;top:-3px;width:14px;height:14px;background:#fff;border:3px solid #333;border-radius:50%;transform:translateX(-50%);box-shadow:0 2px 4px rgba(0,0,0,0.2);}
+
+/* Sunrise/sunset */
+.sun-arc-wrap{background:#fff;border-radius:var(--radius-md);padding:20px;box-shadow:var(--shadow);margin-bottom:20px;}
+body.dark .sun-arc-wrap{background:#1e1e1e;}
+.sun-arc-title{font-size:14px;font-weight:900;color:var(--dark);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+
+/* Air quality widget */
+.aqi-widget{background:linear-gradient(135deg,#1b5e20,#2e7d32);color:#fff;border-radius:var(--radius-md);padding:20px;margin-bottom:20px;}
+.aqi-val{font-size:52px;font-weight:900;line-height:1;}
+.aqi-label{font-size:14px;font-weight:700;margin-top:4px;}
+.aqi-bars{display:flex;gap:4px;margin-top:12px;}
+.aqi-bar{height:8px;border-radius:4px;flex:1;opacity:0.4;}
+.aqi-bar.active{opacity:1;}
+
+/* Climate table */
+.climate-table{width:100%;border-collapse:collapse;font-size:13px;}
+.climate-table th{background:var(--navy);color:#fff;padding:10px 12px;text-align:right;font-weight:700;}
+.climate-table td{padding:10px 12px;border-bottom:1px solid var(--border);}
+.climate-table tr:nth-child(even) td{background:rgba(0,0,0,0.02);}
+body.dark .climate-table tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+body.dark .climate-table td{border-color:#2a2a2a;}
+.temp-bar{height:6px;border-radius:3px;background:linear-gradient(to right,#3b82f6,#ef4444);margin-top:4px;}
 
 /* ADMIN MODAL */
 #adminModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9000;align-items:center;justify-content:center;}
@@ -373,6 +592,14 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
 .stat-num{font-size:28px;font-weight:900;color:var(--red);}
 .stat-label{font-size:12px;color:var(--gray);}
 
+/* TRANSLATION OVERLAY */
+#translateOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:8000;align-items:center;justify-content:center;}
+#translateOverlay.active{display:flex;}
+.translate-box{background:#fff;border-radius:var(--radius-lg);padding:28px;max-width:360px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+body.dark .translate-box{background:#1e1e1e;}
+.translate-spinner{width:50px;height:50px;border:4px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
 /* PAGINATION */
 .pagination{display:flex;gap:6px;align-items:center;justify-content:center;margin:24px 0;flex-wrap:wrap;}
 .pag-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--border);border-radius:var(--radius);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;background:#fff;color:var(--dark);font-family:var(--font-main);}
@@ -404,54 +631,65 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
 .toast{position:fixed;bottom:80px;right:20px;background:var(--navy);color:#fff;padding:12px 20px;border-radius:var(--radius-md);font-size:13px;font-weight:600;z-index:9999;box-shadow:var(--shadow-md);transform:translateX(200%);transition:transform .3s;max-width:280px;}
 .toast.show{transform:translateX(0);}
 
+/* TICKER SOURCE */
+.ticker-source{font-size:9px;background:rgba(255,255,255,0.2);padding:1px 5px;border-radius:2px;margin-left:4px;}
+
 /* RESPONSIVE */
 @media(max-width:1100px){
-.page-layout{grid-template-columns:1fr;}
-.sidebar{display:grid;grid-template-columns:1fr 1fr;}
-.footer-main{grid-template-columns:1fr 1fr;}
-.dash-stats{grid-template-columns:repeat(2,1fr);}
+  .page-layout{grid-template-columns:1fr;}
+  .sidebar{display:grid;grid-template-columns:1fr 1fr;}
+  .footer-main{grid-template-columns:1fr 1fr;}
+  .dash-stats{grid-template-columns:repeat(2,1fr);}
+  .weather-detail-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:768px){
-.hero-grid{grid-template-columns:1fr;}
-.hero-main img{height:260px;}
-.hero-sub{display:none;}
-.news-grid{grid-template-columns:1fr 1fr;}
-.cat-section-grid{grid-template-columns:1fr;}
-.cat-section-main{border-radius:var(--radius) var(--radius) 0 0;}
-.cat-section-list{border-radius:0 0 var(--radius) var(--radius);}
-.sidebar{grid-template-columns:1fr;}
-.footer-main{grid-template-columns:1fr 1fr;}
-.hamburger{display:block;}
-.main-nav{display:none;}
-.top-date{display:none;}
-.search-wrap{max-width:200px;}
-.article-title{font-size:20px;}
-.two-col-sec{grid-template-columns:1fr!important;}
-.cat-banner{height:150px;}
-.cat-banner-title{font-size:22px;}
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-main img{height:260px;}
+  .hero-sub{display:none;}
+  .news-grid{grid-template-columns:1fr 1fr;}
+  .cat-section-grid{grid-template-columns:1fr;}
+  .cat-section-main{border-radius:var(--radius) var(--radius) 0 0;}
+  .cat-section-list{border-radius:0 0 var(--radius) var(--radius);}
+  .sidebar{grid-template-columns:1fr;}
+  .footer-main{grid-template-columns:1fr 1fr;}
+  .hamburger{display:block;}
+  .main-nav{display:none;}
+  .top-date{display:none;}
+  .search-wrap{max-width:220px;}
+  .article-title{font-size:20px;}
+  .two-col-sec{grid-template-columns:1fr!important;}
+  .cat-banner{height:150px;}
+  .cat-banner-title{font-size:22px;}
+  .weather-hero-grid{grid-template-columns:1fr;}
+  .weather-main-temp{font-size:70px;}
+  .forecast-strip{grid-template-columns:repeat(4,1fr);}
+  .weather-detail-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:540px){
-.news-grid{grid-template-columns:1fr;}
-.sidebar{grid-template-columns:1fr;}
-.footer-main{grid-template-columns:1fr;}
-.logo-ar{font-size:18px;}
-.search-wrap{max-width:150px;}
-.header-main{gap:10px;}
-.dash-stats{grid-template-columns:1fr 1fr;}
+  .news-grid{grid-template-columns:1fr;}
+  .sidebar{grid-template-columns:1fr;}
+  .footer-main{grid-template-columns:1fr;}
+  .logo-ar{font-size:18px;}
+  .search-wrap{max-width:160px;}
+  .header-main{gap:10px;}
+  .dash-stats{grid-template-columns:1fr 1fr;}
+  .forecast-strip{grid-template-columns:repeat(3,1fr);}
+  .weather-detail-grid{grid-template-columns:1fr 1fr;}
 }
-
-/* HESPRESS BADGE ON TICKER */
-.ticker-source{font-size:9px;background:rgba(255,255,255,0.2);padding:1px 5px;border-radius:2px;margin-left:4px;}
 </style>
 </head>
 <body>
 
-<!-- Animated Background -->
-<div class="bg-canvas">
-  <div class="bg-orb"></div>
-  <div class="bg-orb"></div>
-  <div class="bg-orb"></div>
-</div>
+<!-- ============================================================
+     LIVE ANIMATED BACKGROUND - Breaking News Themed
+     ============================================================ -->
+<canvas id="bgCanvas"></canvas>
+<div class="bg-orb bg-orb1"></div>
+<div class="bg-orb bg-orb2"></div>
+<div class="bg-orb bg-orb3"></div>
+<div class="bg-grid"></div>
+<div class="bg-news-lines" id="bgNewsLines"></div>
+<div class="bg-particles" id="bgParticles"></div>
 
 <div class="reading-bar" id="readingBar"></div>
 <div class="overlay-bg" id="overlayBg" onclick="closeSidebarNav()"></div>
@@ -460,14 +698,14 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
 <!-- SIDEBAR NAV -->
 <nav class="sidebar-nav" id="sidebarNav">
   <div class="snav-header">
-    <div class="snav-logo-text">عين <span>المغرب</span></div>
+    <div class="snav-logo-text">مشهد <span>اليوم</span></div>
     <button class="snav-close" onclick="closeSidebarNav()"><i class="fas fa-times"></i></button>
   </div>
   <div class="snav-search">
     <input type="text" id="snavSearch" placeholder="ابحث عن خبر..." onkeydown="if(event.key==='Enter'){document.getElementById('searchInput').value=this.value;doSearch(null);closeSidebarNav();}"/>
   </div>
   <div id="snavList"></div>
-  <div class="snav-footer">© 2026 عين المغرب — جميع الحقوق محفوظة</div>
+  <div class="snav-footer">© 2026 مشهد اليوم — جميع الحقوق محفوظة</div>
 </nav>
 
 <!-- SEARCH OVERLAY -->
@@ -486,13 +724,14 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
   <div class="admin-modal-box" style="position:relative">
     <button class="admin-modal-close" onclick="closeAdminModal()"><i class="fas fa-times"></i></button>
     <div style="text-align:center;margin-bottom:16px">
-      <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="22" fill="#0D1B2A" stroke="#C8102E" stroke-width="2"/>
-        <ellipse cx="24" cy="24" rx="14" ry="9" fill="none" stroke="#C8102E" stroke-width="2"/>
-        <circle cx="24" cy="24" r="5" fill="#C8102E"/>
-        <circle cx="24" cy="24" r="2.5" fill="#fff"/>
-        <line x1="10" y1="24" x2="14" y2="24" stroke="#C8102E" stroke-width="2"/>
-        <line x1="34" y1="24" x2="38" y2="24" stroke="#C8102E" stroke-width="2"/>
+      <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+        <rect width="56" height="56" rx="12" fill="#0D1B2A"/>
+        <rect x="8" y="18" width="40" height="5" rx="2.5" fill="#C8102E"/>
+        <rect x="8" y="26" width="28" height="4" rx="2" fill="rgba(255,255,255,0.7)"/>
+        <rect x="8" y="33" width="34" height="4" rx="2" fill="rgba(255,255,255,0.4)"/>
+        <circle cx="43" cy="35" r="8" fill="#C8102E"/>
+        <line x1="43" y1="30" x2="43" y2="40" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="38" y1="35" x2="48" y2="35" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
     </div>
     <div class="admin-modal-title" style="text-align:center">لوحة التحكم</div>
@@ -513,7 +752,7 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
 <!-- ADMIN DASHBOARD -->
 <div id="adminDash">
   <div class="dash-header">
-    <h1><i class="fas fa-cog"></i> لوحة تحكم عين المغرب</h1>
+    <h1><i class="fas fa-cog"></i> لوحة تحكم مشهد اليوم</h1>
     <div style="display:flex;gap:8px;align-items:center">
       <span style="font-size:12px;opacity:0.7" id="dashWelcome"></span>
       <button class="dash-close-btn" onclick="closeAdminDash()"><i class="fas fa-sign-out-alt"></i> خروج</button>
@@ -522,65 +761,33 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
   <div class="dash-body">
     <div class="dash-stats">
       <div class="stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">إجمالي الأخبار</div></div>
-      <div class="stat-card"><div class="stat-num" id="statHespress">0</div><div class="stat-label">من هسبريس</div></div>
+      <div class="stat-card"><div class="stat-num" id="statHespress">0</div><div class="stat-label">من مصادر خارجية</div></div>
       <div class="stat-card"><div class="stat-num" id="statCustom">0</div><div class="stat-label">أخبار مخصصة</div></div>
       <div class="stat-card"><div class="stat-num" id="statToday">0</div><div class="stat-label">أخبار اليوم</div></div>
     </div>
     <div class="dash-tabs">
-      <button class="dash-tab active" onclick="showDashPanel('add')">إضافة خبر</button>
-      <button class="dash-tab" onclick="showDashPanel('manage')">إدارة الأخبار</button>
-      <button class="dash-tab" onclick="showDashPanel('weather')">إعدادات الطقس</button>
-      <button class="dash-tab" onclick="showDashPanel('settings')">إعدادات الموقع</button>
+      <button class="dash-tab active" onclick="showDashPanel('add',event)">إضافة خبر</button>
+      <button class="dash-tab" onclick="showDashPanel('manage',event)">إدارة الأخبار</button>
+      <button class="dash-tab" onclick="showDashPanel('weather',event)">إعدادات الطقس</button>
+      <button class="dash-tab" onclick="showDashPanel('settings',event)">إعدادات الموقع</button>
     </div>
-    <!-- ADD NEWS PANEL -->
     <div class="dash-panel active" id="panel-add">
       <h2 style="font-size:16px;font-weight:900;margin-bottom:16px" id="editNewsTitle">إضافة خبر جديد</h2>
       <input type="hidden" id="editNewsId"/>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-        <div class="form-group" style="grid-column:1/-1">
-          <label>عنوان الخبر *</label>
-          <input type="text" id="newsTitle" placeholder="أدخل عنوان الخبر..."/>
-        </div>
-        <div class="form-group">
-          <label>القسم *</label>
-          <select id="newsCat">
-            <option value="morocco">أخبار المغرب</option>
-            <option value="world">أخبار العالم</option>
-            <option value="economy">الاقتصاد</option>
-            <option value="sports">الرياضة</option>
-            <option value="tech">التكنولوجيا</option>
-            <option value="health">الصحة</option>
-            <option value="culture">الثقافة والفنون</option>
-            <option value="opinion">الرأي والتحليل</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>المصدر</label>
-          <input type="text" id="newsSource" placeholder="مثال: hespress.com" value="hespress.com"/>
-        </div>
-        <div class="form-group" style="grid-column:1/-1">
-          <label>رابط الصورة</label>
-          <input type="text" id="newsImg" placeholder="https://..."/>
-        </div>
-        <div class="form-group" style="grid-column:1/-1">
-          <label>محتوى الخبر (HTML مسموح)</label>
-          <textarea id="newsBody" placeholder="<p>محتوى الخبر...</p>"></textarea>
-        </div>
-        <div class="form-group">
-          <label>اسم الكاتب (للرأي)</label>
-          <input type="text" id="newsAuthor" placeholder="اسم الكاتب"/>
-        </div>
-        <div class="form-group">
-          <label>الدور / التخصص</label>
-          <input type="text" id="newsRole" placeholder="محلل سياسي..."/>
-        </div>
+        <div class="form-group" style="grid-column:1/-1"><label>عنوان الخبر *</label><input type="text" id="newsTitle" placeholder="أدخل عنوان الخبر..."/></div>
+        <div class="form-group"><label>القسم *</label><select id="newsCat"><option value="morocco">أخبار المغرب</option><option value="world">أخبار العالم</option><option value="economy">الاقتصاد</option><option value="sports">الرياضة</option><option value="tech">التكنولوجيا</option><option value="health">الصحة</option><option value="culture">الثقافة والفنون</option><option value="opinion">الرأي والتحليل</option></select></div>
+        <div class="form-group"><label>المصدر</label><input type="text" id="newsSource" placeholder="مثال: hespress.com" value="hespress.com"/></div>
+        <div class="form-group" style="grid-column:1/-1"><label>رابط الصورة</label><input type="text" id="newsImg" placeholder="https://..."/></div>
+        <div class="form-group" style="grid-column:1/-1"><label>محتوى الخبر</label><textarea id="newsBody" placeholder="<p>محتوى الخبر...</p>"></textarea></div>
+        <div class="form-group"><label>اسم الكاتب (للرأي)</label><input type="text" id="newsAuthor" placeholder="اسم الكاتب"/></div>
+        <div class="form-group"><label>الدور / التخصص</label><input type="text" id="newsRole" placeholder="محلل سياسي..."/></div>
       </div>
       <div style="display:flex;gap:10px;margin-top:4px">
         <button class="btn-primary" onclick="saveNews()"><i class="fas fa-save"></i> حفظ الخبر</button>
         <button class="btn-secondary" onclick="resetNewsForm()"><i class="fas fa-undo"></i> إعادة تعيين</button>
       </div>
     </div>
-    <!-- MANAGE PANEL -->
     <div class="dash-panel" id="panel-manage">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
         <h2 style="font-size:16px;font-weight:900">إدارة الأخبار المنشورة</h2>
@@ -588,33 +795,15 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
       </div>
       <div id="manageList"></div>
     </div>
-    <!-- WEATHER PANEL -->
     <div class="dash-panel" id="panel-weather">
       <h2 style="font-size:16px;font-weight:900;margin-bottom:16px">إعدادات الطقس</h2>
-      <div class="form-group">
-        <label>المدينة الافتراضية</label>
-        <select id="weatherDefaultCity">
-          <option value="Rabat">الرباط</option>
-          <option value="Casablanca">الدار البيضاء</option>
-          <option value="Marrakech">مراكش</option>
-          <option value="Fes">فاس</option>
-          <option value="Tangier">طنجة</option>
-          <option value="Agadir">أكادير</option>
-        </select>
-      </div>
+      <div class="form-group"><label>المدينة الافتراضية</label><select id="weatherDefaultCity"><option value="Rabat">الرباط</option><option value="Casablanca">الدار البيضاء</option><option value="Marrakech">مراكش</option><option value="Fes">فاس</option><option value="Tangier">طنجة</option><option value="Agadir">أكادير</option></select></div>
       <button class="btn-primary" onclick="saveWeatherSettings()"><i class="fas fa-save"></i> حفظ الإعدادات</button>
     </div>
-    <!-- SETTINGS PANEL -->
     <div class="dash-panel" id="panel-settings">
       <h2 style="font-size:16px;font-weight:900;margin-bottom:16px">إعدادات الموقع</h2>
-      <div class="form-group">
-        <label>نص الخبر العاجل</label>
-        <input type="text" id="settingBreaking" placeholder="أضف نص عاجل مخصص..."/>
-      </div>
-      <div class="form-group">
-        <label>كود Google AdSense (Publisher ID)</label>
-        <input type="text" id="settingAdsense" placeholder="ca-pub-XXXXXXXXXXXXXXXXX"/>
-      </div>
+      <div class="form-group"><label>نص الخبر العاجل</label><input type="text" id="settingBreaking" placeholder="أضف نص عاجل مخصص..."/></div>
+      <div class="form-group"><label>كود Google AdSense (Publisher ID)</label><input type="text" id="settingAdsense" placeholder="ca-pub-XXXXXXXXXXXXXXXXX"/></div>
       <button class="btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> حفظ الإعدادات</button>
     </div>
   </div>
@@ -624,13 +813,8 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
 <div class="breaking-bar" id="breakingBarEl">
   <div class="container" style="width:100%;display:flex;align-items:center;height:100%">
     <div class="breaking-inner">
-      <div class="breaking-label">
-        <span class="dot"></span>
-        <span id="breakingLabelText">عاجل</span>
-      </div>
-      <div class="breaking-ticker">
-        <div class="ticker-track" id="ticker"></div>
-      </div>
+      <div class="breaking-label"><span class="dot"></span><span id="breakingLabelText">عاجل</span></div>
+      <div class="breaking-ticker"><div class="ticker-track" id="ticker"></div></div>
     </div>
   </div>
 </div>
@@ -642,16 +826,16 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
       <div class="top-bar-left">
         <div class="top-date"><i class="far fa-calendar-alt"></i><span id="currentDate"></span></div>
         <div class="top-social">
-          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" title="Twitter"><i class="fab fa-x-twitter"></i></a>
-          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
-          <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
       <div class="top-bar-right">
-        <button class="admin-btn" onclick="openAdminModal()" title="لوحة التحكم"><i class="fas fa-shield-alt"></i></button>
+        <button class="admin-btn" id="adminBtnTop" onclick="openAdminModal()" title="لوحة التحكم"><i class="fas fa-shield-alt"></i> إدارة</button>
         <button class="dark-toggle" onclick="toggleDark()" title="الوضع الليلي"><i class="fas fa-moon" id="darkIcon"></i></button>
         <div class="lang-selector">
           <button class="lang-btn"><i class="fas fa-globe"></i><span id="currentLang">العربية</span><i class="fas fa-chevron-down" style="font-size:9px"></i></button>
@@ -671,42 +855,26 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
 <header class="site-header">
   <div class="container">
     <div class="header-main">
-      <!-- SVG LOGO -->
       <div class="logo-wrap" onclick="navigate('home')">
-        <svg class="logo-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#0D1B2A"/>
-              <stop offset="100%" stop-color="#1E3A5F"/>
-            </linearGradient>
-            <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#C8102E"/>
-              <stop offset="100%" stop-color="#E8192E"/>
-            </linearGradient>
-          </defs>
-          <circle cx="26" cy="26" r="25" fill="url(#lg1)"/>
-          <circle cx="26" cy="26" r="25" fill="none" stroke="#C8102E" stroke-width="1.5" opacity="0.6"/>
-          <ellipse cx="26" cy="26" rx="18" ry="11" fill="none" stroke="#C8102E" stroke-width="2"/>
-          <ellipse cx="26" cy="26" rx="18" ry="11" fill="none" stroke="rgba(200,16,46,0.3)" stroke-width="5"/>
-          <circle cx="26" cy="26" r="6.5" fill="url(#lg2)"/>
-          <circle cx="26" cy="26" r="3" fill="white"/>
-          <circle cx="26" cy="26" r="1.2" fill="#0D1B2A"/>
-          <line x1="8" y1="26" x2="12" y2="26" stroke="#C8102E" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="40" y1="26" x2="44" y2="26" stroke="#C8102E" stroke-width="1.8" stroke-linecap="round"/>
-          <line x1="26" y1="8" x2="26" y2="12" stroke="rgba(200,16,46,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="26" y1="40" x2="26" y2="44" stroke="rgba(200,16,46,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="17" cy="17" r="1.5" fill="rgba(200,16,46,0.35)"/>
-          <circle cx="35" cy="17" r="1.5" fill="rgba(200,16,46,0.35)"/>
-          <circle cx="17" cy="35" r="1.5" fill="rgba(200,16,46,0.35)"/>
-          <circle cx="35" cy="35" r="1.5" fill="rgba(200,16,46,0.35)"/>
-        </svg>
+        <div class="logo-svg-wrap">
+          <svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="7" width="28" height="4" rx="2" fill="#C8102E"/>
+            <rect x="3" y="14" width="20" height="2.5" rx="1.25" fill="rgba(255,255,255,0.75)"/>
+            <rect x="3" y="19" width="24" height="2.5" rx="1.25" fill="rgba(255,255,255,0.5)"/>
+            <rect x="3" y="24" width="16" height="2.5" rx="1.25" fill="rgba(255,255,255,0.35)"/>
+            <circle cx="27" cy="22" r="6" fill="rgba(200,16,46,0.2)" stroke="#C8102E" stroke-width="1.5"/>
+            <circle cx="27" cy="22" r="2.5" fill="#C8102E"/>
+            <circle cx="28.2" cy="20.8" r="1" fill="rgba(255,255,255,0.6)"/>
+          </svg>
+        </div>
         <div class="logo-text-block">
-          <div class="logo-ar">عين <span>المغرب</span></div>
-          <div class="logo-en">Ain Al-Maghrib</div>
+          <div class="logo-ar">مشهد <span>اليوم</span></div>
+          <div class="logo-en">Mashhad Al-Yawm</div>
           <div class="logo-tagline">ننقل الخبر بسرعة ومصداقية</div>
         </div>
       </div>
 
+      <!-- SEARCH - clean icon only, no red frame -->
       <div class="search-wrap">
         <form class="search-form" onsubmit="return doSearch(event)">
           <input class="search-input" id="searchInput" type="text" placeholder="ابحث عن خبر..."/>
@@ -724,6 +892,15 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
   </nav>
 </header>
 
+<!-- TRANSLATION STATUS -->
+<div id="translateOverlay">
+  <div class="translate-box">
+    <div class="translate-spinner"></div>
+    <div style="font-size:15px;font-weight:700;color:var(--dark)" id="translateMsg">جاري الترجمة...</div>
+    <div style="font-size:12px;color:var(--gray);margin-top:6px" id="translateSub">يرجى الانتظار</div>
+  </div>
+</div>
+
 <!-- MAIN CONTENT -->
 <main id="mainContent"></main>
 
@@ -733,75 +910,47 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
     <div class="footer-main">
       <div class="footer-about">
         <div class="footer-logo-wrap" style="margin-bottom:10px">
-          <svg width="44" height="44" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="26" cy="26" r="25" fill="#0D1B2A" stroke="#C8102E" stroke-width="1.5" opacity="0.8"/>
-            <ellipse cx="26" cy="26" rx="18" ry="11" fill="none" stroke="#C8102E" stroke-width="2"/>
-            <circle cx="26" cy="26" r="6.5" fill="#C8102E"/>
-            <circle cx="26" cy="26" r="3" fill="white"/>
-            <circle cx="26" cy="26" r="1.2" fill="#0D1B2A"/>
-            <line x1="8" y1="26" x2="12" y2="26" stroke="#C8102E" stroke-width="1.8" stroke-linecap="round"/>
-            <line x1="40" y1="26" x2="44" y2="26" stroke="#C8102E" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
+          <div style="width:40px;height:40px;background:#0D1B2A;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="26" height="26" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="7" width="28" height="4" rx="2" fill="#C8102E"/>
+              <rect x="3" y="14" width="20" height="2.5" rx="1.25" fill="rgba(255,255,255,0.7)"/>
+              <rect x="3" y="19" width="24" height="2.5" rx="1.25" fill="rgba(255,255,255,0.45)"/>
+              <rect x="3" y="24" width="16" height="2.5" rx="1.25" fill="rgba(255,255,255,0.3)"/>
+              <circle cx="27" cy="22" r="6" fill="rgba(200,16,46,0.2)" stroke="#C8102E" stroke-width="1.5"/>
+              <circle cx="27" cy="22" r="2.5" fill="#C8102E"/>
+            </svg>
+          </div>
           <div style="margin-right:10px">
-            <div class="footer-logo-text">عين <span>المغرب</span></div>
-            <div style="font-size:10px;color:#555;letter-spacing:1px">Ain Al-Maghrib</div>
+            <div class="footer-logo-text">مشهد <span>اليوم</span></div>
+            <div style="font-size:10px;color:#555;letter-spacing:1px">Mashhad Al-Yawm</div>
           </div>
         </div>
-        <p>منصة إخبارية رائدة تُقدم أخبار المغرب والعالم بموضوعية وسرعة ومصداقية. نؤمن بأن المعلومة الصادقة هي حق لكل مواطن.</p>
+        <p>منصة إخبارية رائدة تُقدم أخبار المغرب والعالم بموضوعية وسرعة ومصداقية.</p>
         <div style="font-size:13px;color:var(--gold);font-style:italic;margin-top:6px">"ننقل الخبر بسرعة ومصداقية"</div>
         <div class="footer-social">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-x-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-          <a href="#"><i class="fab fa-telegram"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-          <a href="#"><i class="fas fa-rss"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-telegram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>الأقسام</h4>
-        <div class="footer-links" id="footerSections"></div>
-      </div>
-      <div class="footer-col">
-        <h4>روابط مهمة</h4>
-        <div class="footer-links">
-          <a href="#">من نحن</a>
-          <a href="#">اتصل بنا</a>
-          <a href="#">أعلن معنا</a>
-          <a href="#">شروط الاستخدام</a>
-          <a href="#">سياسة الخصوصية</a>
-        </div>
-      </div>
+      <div class="footer-col"><h4>الأقسام</h4><div class="footer-links" id="footerSections"></div></div>
+      <div class="footer-col"><h4>روابط مهمة</h4><div class="footer-links"><a href="#">من نحن</a><a href="#">اتصل بنا</a><a href="#">أعلن معنا</a><a href="#">شروط الاستخدام</a><a href="#">سياسة الخصوصية</a></div></div>
       <div class="footer-col">
         <h4>تواصل معنا</h4>
         <div class="footer-links">
           <a href="#"><i class="fas fa-map-marker-alt" style="color:var(--red)"></i> الرباط، المغرب</a>
-          <a href="#"><i class="fas fa-phone" style="color:var(--red)"></i> 0537 000 000</a>
-          <a href="#"><i class="fas fa-envelope" style="color:var(--red)"></i> info@ain-almaghrib.ma</a>
-        </div>
-        <div style="margin-top:14px">
-          <div style="font-size:12px;color:#555;margin-bottom:7px">تحميل تطبيقنا:</div>
-          <div style="display:flex;gap:7px;flex-wrap:wrap">
-            <a href="#" style="background:#1E3A5F;border:1px solid #2a4a70;border-radius:5px;padding:5px 9px;display:flex;align-items:center;gap:5px;color:#ccc;font-size:11px"><i class="fab fa-apple"></i> App Store</a>
-            <a href="#" style="background:#1E3A5F;border:1px solid #2a4a70;border-radius:5px;padding:5px 9px;display:flex;align-items:center;gap:5px;color:#ccc;font-size:11px"><i class="fab fa-google-play"></i> Google Play</a>
-          </div>
+          <a href="#"><i class="fas fa-envelope" style="color:var(--red)"></i> info@mashhad-alyawm.ma</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="footer-bottom-inner">
-        <div>© 2026 عين المغرب. جميع الحقوق محفوظة.</div>
-        <div class="footer-bottom-links">
-          <a href="#">سياسة الخصوصية</a>
-          <a href="#">شروط الاستخدام</a>
-          <a href="#">اتصل بنا</a>
-        </div>
+        <div>© 2026 مشهد اليوم. جميع الحقوق محفوظة.</div>
+        <div class="footer-bottom-links"><a href="#">سياسة الخصوصية</a><a href="#">شروط الاستخدام</a><a href="#">اتصل بنا</a></div>
       </div>
       <div class="footer-disclaimer">
         <i class="fas fa-info-circle" style="color:var(--red)"></i>
-        موقع عين المغرب يعمل كمجمع إخباري فقط — نقوم بنشر ومشاركة الأخبار من مصادر إعلامية مختلفة لتعميم الفائدة وتوسيع انتشار الخبر.
-        جميع حقوق المحتوى الأصلي تعود لمصادرها الأصلية كـ hespress.com وmaroc.ma وغيرها. لا نمتلك أي محتوى منشور.
+        موقع مشهد اليوم يعمل كمجمع إخباري — جميع حقوق المحتوى الأصلي تعود لمصادرها كـ hespress.com وgoud.ma وtelquel.ma وغيرها.
       </div>
     </div>
   </div>
@@ -813,176 +962,127 @@ body.dark .admin-field input{background:#2a2a2a;border-color:#333;color:#e0e0e0;
 // ============================================================
 // CONFIG
 // ============================================================
-const ADMIN_USER = 'maroc news';
-const ADMIN_PASS = 'akhbar12345';
-const LS_CUSTOM    = 'ain_custom_news';
-const LS_HESP_CACHE= 'ain_hespress_cache';
-const LS_HESP_TS   = 'ain_hespress_ts';
-const LS_WX_CACHE  = 'ain_weather_cache';
-const LS_WX_TS     = 'ain_weather_ts';
-const LS_ADMIN_SES = 'ain_admin_session';
-const LS_SETTINGS  = 'ain_site_settings';
-const HESPRESS_INTERVAL = 30 * 60 * 1000; // 30 min
-const WEATHER_INTERVAL  = 30 * 60 * 1000;
+const ADMIN_USER='maroc news';
+const ADMIN_PASS='akhbar12345';
+const SECRET_PHRASE='سفيان صاحب الموقع الرسمي';
+const LS_CUSTOM='mashhad_custom_news';
+const LS_HESP_CACHE='mashhad_hespress_cache';
+const LS_HESP_TS='mashhad_hespress_ts';
+const LS_WX_CACHE='mashhad_weather_cache';
+const LS_WX_TS='mashhad_weather_ts';
+const LS_ADMIN_SES='mashhad_admin_session';
+const LS_SETTINGS='mashhad_site_settings';
+const LS_LANG='mashhad_lang';
+const HESPRESS_INTERVAL=15*60*1000;
+const WEATHER_INTERVAL=30*60*1000;
 
-const CATEGORIES = [
-  { id:'home',    icon:'fas fa-home',          label:'الرئيسية',      tag:'الرئيسية',      banner:'https://images.unsplash.com/photo-1539768942893-daf53e448371?w=1200&q=80' },
-  { id:'morocco', icon:'fas fa-flag',           label:'أخبار المغرب',  tag:'المغرب',        color:'#C8102E', banner:'https://images.unsplash.com/photo-1555952517-2e8e729e0b44?w=1200&q=80' },
-  { id:'world',   icon:'fas fa-globe',          label:'أخبار العالم',  tag:'العالم',        color:'#0D2B45', banner:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=80' },
-  { id:'economy', icon:'fas fa-chart-line',     label:'الاقتصاد',      tag:'الاقتصاد',      color:'#2c6e49', banner:'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80' },
-  { id:'sports',  icon:'fas fa-futbol',         label:'الرياضة',       tag:'الرياضة',       color:'#1a237e', banner:'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1200&q=80' },
-  { id:'tech',    icon:'fas fa-laptop-code',    label:'التكنولوجيا',   tag:'تكنولوجيا',     color:'#37474f', banner:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80' },
-  { id:'health',  icon:'fas fa-heartbeat',      label:'الصحة',         tag:'الصحة',         color:'#880e4f', banner:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80' },
-  { id:'culture', icon:'fas fa-theater-masks',  label:'الثقافة',       tag:'الثقافة',       color:'#4a148c', banner:'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&q=80' },
-  { id:'weather', icon:'fas fa-cloud-sun',      label:'الطقس',         tag:'الطقس',         color:'#0288d1', banner:'https://images.unsplash.com/photo-1504608524841-42523c8e9e23?w=1200&q=80' },
-  { id:'opinion', icon:'fas fa-pen-nib',        label:'الرأي والتحليل',tag:'الرأي',         color:'#6d4c41', banner:'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80' },
+const CATEGORIES=[
+  {id:'home',icon:'fas fa-home',label:'الرئيسية',tag:'الرئيسية',banner:'https://images.unsplash.com/photo-1539768942893-daf53e448371?w=1200&q=80'},
+  {id:'morocco',icon:'fas fa-flag',label:'أخبار المغرب',tag:'المغرب',color:'#C8102E',banner:'https://images.unsplash.com/photo-1555952517-2e8e729e0b44?w=1200&q=80'},
+  {id:'world',icon:'fas fa-globe',label:'أخبار العالم',tag:'العالم',color:'#0D2B45',banner:'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=80'},
+  {id:'economy',icon:'fas fa-chart-line',label:'الاقتصاد',tag:'الاقتصاد',color:'#2c6e49',banner:'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80'},
+  {id:'sports',icon:'fas fa-futbol',label:'الرياضة',tag:'الرياضة',color:'#1a237e',banner:'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1200&q=80'},
+  {id:'tech',icon:'fas fa-laptop-code',label:'التكنولوجيا',tag:'تكنولوجيا',color:'#37474f',banner:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80'},
+  {id:'health',icon:'fas fa-heartbeat',label:'الصحة',tag:'الصحة',color:'#880e4f',banner:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80'},
+  {id:'culture',icon:'fas fa-theater-masks',label:'الثقافة',tag:'الثقافة',color:'#4a148c',banner:'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&q=80'},
+  {id:'weather',icon:'fas fa-cloud-sun',label:'الطقس',tag:'الطقس',color:'#0288d1',banner:'https://images.unsplash.com/photo-1504608524841-42523c8e9e23?w=1200&q=80'},
+  {id:'opinion',icon:'fas fa-pen-nib',label:'الرأي والتحليل',tag:'الرأي',color:'#6d4c41',banner:'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=80'},
 ];
 
-// Category-specific image pools for relevant pictures
-const CAT_IMAGES = {
-  morocco:[
-    'https://images.unsplash.com/photo-1539768942893-daf53e448371?w=800&q=75',
-    'https://images.unsplash.com/photo-1555952517-2e8e729e0b44?w=800&q=75',
-    'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=75',
-    'https://images.unsplash.com/photo-1529516548873-9ce57c8f155e?w=800&q=75',
-    'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=75',
-    'https://images.unsplash.com/photo-1548019979-9ba31c32b27c?w=800&q=75',
-  ],
-  world:[
-    'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=75',
-    'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=75',
-    'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=75',
-    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=75',
-    'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=800&q=75',
-  ],
-  economy:[
-    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=75',
-    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=75',
-    'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=75',
-    'https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=75',
-  ],
-  sports:[
-    'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=75',
-    'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&q=75',
-    'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=75',
-    'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=75',
-    'https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=800&q=75',
-  ],
-  tech:[
-    'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=75',
-    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=75',
-    'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=75',
-    'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=75',
-    'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=75',
-  ],
-  health:[
-    'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=75',
-    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=75',
-    'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&q=75',
-    'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=75',
-    'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=800&q=75',
-  ],
-  culture:[
-    'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=75',
-    'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=75',
-    'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=75',
-    'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=800&q=75',
-  ],
-  opinion:[
-    'https://i.pravatar.cc/150?img=12',
-    'https://i.pravatar.cc/150?img=47',
-    'https://i.pravatar.cc/150?img=33',
-    'https://i.pravatar.cc/150?img=68',
-  ]
+const CAT_IMAGES={
+  morocco:['https://images.unsplash.com/photo-1539768942893-daf53e448371?w=800&q=75','https://images.unsplash.com/photo-1555952517-2e8e729e0b44?w=800&q=75','https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=75','https://images.unsplash.com/photo-1529516548873-9ce57c8f155e?w=800&q=75','https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800&q=75'],
+  world:['https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=75','https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=75','https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=75','https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=75'],
+  economy:['https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=75','https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=75','https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=75'],
+  sports:['https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=75','https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&q=75','https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=75','https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=75'],
+  tech:['https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=75','https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=75','https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=75'],
+  health:['https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=75','https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=75','https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&q=75'],
+  culture:['https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=75','https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=75','https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=75'],
+  opinion:['https://i.pravatar.cc/150?img=12','https://i.pravatar.cc/150?img=47','https://i.pravatar.cc/150?img=33','https://i.pravatar.cc/150?img=68']
 };
-function getCatImage(catId, idx=0){
-  const imgs = CAT_IMAGES[catId]||CAT_IMAGES.world;
-  return imgs[idx % imgs.length];
-}
+function getCatImage(catId,idx=0){const imgs=CAT_IMAGES[catId]||CAT_IMAGES.world;return imgs[idx%imgs.length];}
 
 // ============================================================
 // STATE
 // ============================================================
-let ALL_NEWS = [];
-let weatherCache = {};
-let currentWeatherCity = 'Rabat';
-let currentLang = 'ar';
-let currentPage = 'home';
-let currentCat = null;
-let currentArticle = null;
-let currentWeatherTab = 0;
-let adminLoggedIn = false;
+let ALL_NEWS=[];
+let weatherCache={};
+let currentWeatherCity='Rabat';
+let currentLang='ar';
+let currentPage='home';
+let currentArticle=null;
+let currentWeatherTab=0;
+let adminLoggedIn=false;
+let translationCache={};
 
 // ============================================================
 // SETTINGS
 // ============================================================
-function getSettings(){
-  try{ return JSON.parse(localStorage.getItem(LS_SETTINGS)||'{}'); }catch(e){ return {}; }
-}
-function saveSettingsData(obj){
-  localStorage.setItem(LS_SETTINGS, JSON.stringify(obj));
-}
+function getSettings(){try{return JSON.parse(localStorage.getItem(LS_SETTINGS)||'{}');}catch(e){return {};}}
+function saveSettingsData(obj){localStorage.setItem(LS_SETTINGS,JSON.stringify(obj));}
 
 // ============================================================
-// SEED NEWS (base content)
+// SEED NEWS
 // ============================================================
-const SEED_NEWS = [
+const SEED_NEWS=[
   {id:'m1',cat:'morocco',title:'المغرب يُطلق أكبر مشروع للطاقة الشمسية في إفريقيا بقدرة إنتاجية تتجاوز 4000 ميغاواط',img:getCatImage('morocco',0),time:Date.now()-7200000,views:24560,source:'maroc.ma',body:`<p>أعلن المغرب عن إطلاق أضخم مشروع للطاقة الشمسية في القارة الأفريقية بقدرة إنتاجية تتجاوز 4000 ميغاواط.</p><p>يمتد المشروع عبر عدة مناطق في الجنوب المغربي ويُعدّ جزءاً من الاستراتيجية الوطنية للطاقة التي تهدف إلى رفع حصة الطاقات المتجددة إلى 52%.</p><p>وقد حظي المشروع باستثمارات دولية ضخمة تتجاوز 8 مليارات دولار بمشاركة شركات أوروبية وخليجية وصينية بارزة.</p>`},
-  {id:'m2',cat:'morocco',title:'افتتاح خط سككي جديد يربط مدينة القنيطرة بمطار محمد الخامس الدولي',img:getCatImage('morocco',1),time:Date.now()-10800000,views:8100,source:'maroc.ma',body:`<p>دشّن المغرب خطاً سككياً جديداً يربط مدينة القنيطرة بمطار محمد الخامس الدولي في إطار الاستعدادات لاستضافة كأس العالم 2030.</p><p>يمتد الخط على مسافة 65 كيلومتراً ويتيح التنقل السريع بين مدن عدة.</p>`},
+  {id:'m2',cat:'morocco',title:'افتتاح خط سككي جديد يربط مدينة القنيطرة بمطار محمد الخامس الدولي',img:getCatImage('morocco',1),time:Date.now()-10800000,views:8100,source:'maroc.ma',body:`<p>دشّن المغرب خطاً سككياً جديداً يربط مدينة القنيطرة بمطار محمد الخامس الدولي في إطار الاستعدادات لاستضافة كأس العالم 2030.</p>`},
   {id:'m3',cat:'morocco',title:'السياحة المغربية تسجل ارتفاعاً قياسياً في أعداد السياح الوافدين خلال 2026',img:getCatImage('morocco',2),time:Date.now()-18000000,views:12340,source:'maroc.ma',body:`<p>كشفت وزارة السياحة أن المغرب استقبل ما يزيد على 4 ملايين سائح خلال الأشهر الثلاثة الأولى من عام 2026.</p>`},
-  {id:'w1',cat:'world',title:'قمة دولية للمناخ تختتم أعمالها باتفاقية تاريخية للحد من الانبعاثات الكربونية',img:getCatImage('world',0),time:Date.now()-3600000,views:8240,source:'maroc.ma',body:`<p>اختتمت القمة الدولية للمناخ في جنيف أعمالها بالتوقيع على اتفاقية تاريخية تلزم الدول الكبرى بخفض انبعاثاتها الكربونية.</p>`},
-  {id:'w2',cat:'world',title:'الأمم المتحدة تدعو إلى وقف فوري لإطلاق النار في منطقة الشرق الأوسط',img:getCatImage('world',1),time:Date.now()-5400000,views:19000,source:'maroc.ma',body:`<p>طالب مجلس الأمن الدولي بوقف فوري لإطلاق النار في عدد من نقاط التوتر بمنطقة الشرق الأوسط.</p>`},
-  {id:'e1',cat:'economy',title:'صندوق النقد الدولي يرفع توقعاته لنمو الاقتصاد المغربي إلى 3.8%',img:getCatImage('economy',0),time:Date.now()-14400000,views:11800,source:'maroc.ma',body:`<p>رفع صندوق النقد الدولي توقعاته لنمو الاقتصاد المغربي خلال العام الجاري إلى 3.8% محتجاً بتسارع الإصلاحات الهيكلية.</p>`},
-  {id:'e2',cat:'economy',title:'أسعار النفط ترتفع لأعلى مستوياتها منذ ستة أشهر وسط توترات متصاعدة',img:getCatImage('economy',1),time:Date.now()-18000000,views:11200,source:'maroc.ma',body:`<p>قفزت أسعار النفط الخام في الأسواق الدولية لتصل إلى أعلى مستوياتها منذ ستة أشهر.</p>`},
-  {id:'s1',cat:'sports',title:'الأسود يتأهلون لنهائيات كأس إفريقيا بفوز مقنع على منتخب غانا',img:getCatImage('sports',0),time:Date.now()-10800000,views:31200,source:'maroc.ma',body:`<p>تأهل المنتخب المغربي لكرة القدم إلى نهائيات كأس أمم أفريقيا 2026 بعد فوز قاطع على منتخب غانا بهدفين نظيفين.</p>`},
-  {id:'s2',cat:'sports',title:'الوداد البيضاوي يتعاقد مع نجم دولي قادم من الدوري الإسباني',img:getCatImage('sports',1),time:Date.now()-7200000,views:18900,source:'maroc.ma',body:`<p>أعلن نادي الوداد البيضاوي عن التعاقد مع لاعب دولي بارز قادم من الدوري الإسباني.</p>`},
-  {id:'s4',cat:'sports',title:'المغرب يستعد لاستضافة كأس العالم 2030 في ستة ملاعب كبرى',img:getCatImage('sports',3),time:Date.now()-86400000,views:45000,source:'maroc.ma',body:`<p>أكدت الفيفا أن المغرب سيحتضن مباريات كأس العالم 2030 في ستة ملاعب بمدن مختلفة تشمل الرباط والدار البيضاء ومراكش.</p>`},
-  {id:'t1',cat:'tech',title:'المغرب يحتضن قمة أفريقيا للذكاء الاصطناعي بمشاركة 40 دولة',img:getCatImage('tech',0),time:Date.now()-18000000,views:9810,source:'maroc.ma',body:`<p>احتضنت الدار البيضاء النسخة الثالثة من قمة أفريقيا للذكاء الاصطناعي بمشاركة خبراء ومسؤولين من 40 دولة.</p>`},
+  {id:'w1',cat:'world',title:'قمة دولية للمناخ تختتم أعمالها باتفاقية تاريخية للحد من الانبعاثات الكربونية',img:getCatImage('world',0),time:Date.now()-3600000,views:8240,source:'maroc.ma',body:`<p>اختتمت القمة الدولية للمناخ في جنيف أعمالها بالتوقيع على اتفاقية تاريخية.</p>`},
+  {id:'w2',cat:'world',title:'الأمم المتحدة تدعو إلى وقف فوري لإطلاق النار في منطقة الشرق الأوسط',img:getCatImage('world',1),time:Date.now()-5400000,views:19000,source:'maroc.ma',body:`<p>طالب مجلس الأمن الدولي بوقف فوري لإطلاق النار.</p>`},
+  {id:'e1',cat:'economy',title:'صندوق النقد الدولي يرفع توقعاته لنمو الاقتصاد المغربي إلى 3.8%',img:getCatImage('economy',0),time:Date.now()-14400000,views:11800,source:'maroc.ma',body:`<p>رفع صندوق النقد الدولي توقعاته لنمو الاقتصاد المغربي إلى 3.8%.</p>`},
+  {id:'e2',cat:'economy',title:'أسعار النفط ترتفع لأعلى مستوياتها منذ ستة أشهر وسط توترات متصاعدة',img:getCatImage('economy',1),time:Date.now()-18000000,views:11200,source:'maroc.ma',body:`<p>قفزت أسعار النفط الخام في الأسواق الدولية.</p>`},
+  {id:'s1',cat:'sports',title:'الأسود يتأهلون لنهائيات كأس إفريقيا بفوز مقنع على منتخب غانا',img:getCatImage('sports',0),time:Date.now()-10800000,views:31200,source:'maroc.ma',body:`<p>تأهل المنتخب المغربي لكرة القدم إلى نهائيات كأس أمم أفريقيا 2026.</p>`},
+  {id:'s2',cat:'sports',title:'الوداد البيضاوي يتعاقد مع نجم دولي قادم من الدوري الإسباني',img:getCatImage('sports',1),time:Date.now()-7200000,views:18900,source:'maroc.ma',body:`<p>أعلن نادي الوداد البيضاوي عن التعاقد مع لاعب دولي بارز.</p>`},
+  {id:'s4',cat:'sports',title:'المغرب يستعد لاستضافة كأس العالم 2030 في ستة ملاعب كبرى',img:getCatImage('sports',3),time:Date.now()-86400000,views:45000,source:'maroc.ma',body:`<p>أكدت الفيفا أن المغرب سيحتضن مباريات كأس العالم 2030 في ستة ملاعب.</p>`},
+  {id:'t1',cat:'tech',title:'المغرب يحتضن قمة أفريقيا للذكاء الاصطناعي بمشاركة 40 دولة',img:getCatImage('tech',0),time:Date.now()-18000000,views:9810,source:'maroc.ma',body:`<p>احتضنت الدار البيضاء النسخة الثالثة من قمة أفريقيا للذكاء الاصطناعي.</p>`},
   {id:'t2',cat:'tech',title:'إطلاق الجيل السادس من شبكات الاتصالات تجريبياً في ثلاث مدن مغربية',img:getCatImage('tech',1),time:Date.now()-10800000,views:9810,source:'maroc.ma',body:`<p>أعلنت وزارة الرقمنة عن إطلاق تجريبي لتقنية 6G في الرباط والدار البيضاء ومراكش.</p>`},
-  {id:'h1',cat:'health',title:'اكتشاف علاجي جديد يبشر بالقضاء على أحد أشد أمراض السرطان',img:getCatImage('health',0),time:Date.now()-7200000,views:15600,source:'maroc.ma',body:`<p>أعلن فريق من الباحثين الدوليين عن اكتشاف علاج واعد لسرطان البنكرياس يظهر فعالية استثنائية في المراحل المبكرة.</p>`},
-  {id:'h3',cat:'health',title:'منظمة الصحة العالمية تحذر من تفشٍّ محتمل لفيروس جديد في إفريقيا',img:getCatImage('health',2),time:Date.now()-14400000,views:21000,source:'maroc.ma',body:`<p>أصدرت منظمة الصحة العالمية تحذيراً وقائياً إزاء تقارير عن فيروس تنفسي جديد رصد في عدة دول أفريقية.</p>`},
-  {id:'c1',cat:'culture',title:'مهرجان مراكش الدولي للسينما يعلن عن قائمة الأفلام المنافسة',img:getCatImage('culture',0),time:Date.now()-14400000,views:6340,source:'maroc.ma',body:`<p>أعلن مهرجان مراكش الدولي للسينما عن القائمة الرسمية للأفلام المتنافسة على الجائزة الكبرى.</p>`},
-  {id:'op1',cat:'opinion',title:'التحولات الاقتصادية في المغرب وانعكاساتها على الطبقة الوسطى',img:getCatImage('opinion',0),time:Date.now()-86400000,views:4300,author:'د. أحمد الراشدي',role:'محلل اقتصادي',source:'maroc.ma',body:`<p>يشهد الاقتصاد المغربي تحولات هيكلية عميقة تمس مختلف شرائح المجتمع وتعيد رسم ملامح الطبقة الوسطى.</p>`},
-  {id:'op2',cat:'opinion',title:'الديبلوماسية المغربية: كيف أصبح المغرب لاعباً محورياً دولياً',img:getCatImage('opinion',1),time:Date.now()-172800000,views:3900,author:'فاطمة الزهراء بنسالم',role:'باحثة في الشأن السياسي',source:'maroc.ma',body:`<p>منذ سنوات قليلة ضاعف المغرب حضوره الدبلوماسي على المستوى الدولي بشكل ملحوظ.</p>`},
+  {id:'h1',cat:'health',title:'اكتشاف علاجي جديد يبشر بالقضاء على أحد أشد أمراض السرطان',img:getCatImage('health',0),time:Date.now()-7200000,views:15600,source:'maroc.ma',body:`<p>أعلن فريق من الباحثين الدوليين عن اكتشاف علاج واعد لسرطان البنكرياس.</p>`},
+  {id:'h3',cat:'health',title:'منظمة الصحة العالمية تحذر من تفشٍّ محتمل لفيروس جديد في إفريقيا',img:getCatImage('health',2),time:Date.now()-14400000,views:21000,source:'maroc.ma',body:`<p>أصدرت منظمة الصحة العالمية تحذيراً وقائياً.</p>`},
+  {id:'c1',cat:'culture',title:'مهرجان مراكش الدولي للسينما يعلن عن قائمة الأفلام المنافسة',img:getCatImage('culture',0),time:Date.now()-14400000,views:6340,source:'maroc.ma',body:`<p>أعلن مهرجان مراكش الدولي للسينما عن القائمة الرسمية للأفلام المتنافسة.</p>`},
+  {id:'op1',cat:'opinion',title:'التحولات الاقتصادية في المغرب وانعكاساتها على الطبقة الوسطى',img:getCatImage('opinion',0),time:Date.now()-86400000,views:4300,author:'د. أحمد الراشدي',role:'محلل اقتصادي',source:'maroc.ma',body:`<p>يشهد الاقتصاد المغربي تحولات هيكلية عميقة تمس مختلف شرائح المجتمع.</p>`},
+  {id:'op2',cat:'opinion',title:'الديبلوماسية المغربية: كيف أصبح المغرب لاعباً محورياً دولياً',img:getCatImage('opinion',1),time:Date.now()-172800000,views:3900,author:'فاطمة الزهراء بنسالم',role:'باحثة في الشأن السياسي',source:'maroc.ma',body:`<p>منذ سنوات قليلة ضاعف المغرب حضوره الدبلوماسي على المستوى الدولي.</p>`},
 ];
 
 // ============================================================
 // INIT NEWS
 // ============================================================
 function initNews(){
-  ALL_NEWS = [...SEED_NEWS];
-  // Load custom (admin-added) news
-  try{
-    const custom = JSON.parse(localStorage.getItem(LS_CUSTOM)||'[]');
-    custom.forEach(n=>{ if(!ALL_NEWS.find(x=>x.id===n.id)) ALL_NEWS.unshift(n); });
-  }catch(e){}
-  // Load cached hespress
-  try{
-    const hesp = JSON.parse(localStorage.getItem(LS_HESP_CACHE)||'[]');
-    hesp.forEach(n=>{ if(!ALL_NEWS.find(x=>x.id===n.id)) ALL_NEWS.push(n); });
-  }catch(e){}
+  ALL_NEWS=[...SEED_NEWS];
+  try{const custom=JSON.parse(localStorage.getItem(LS_CUSTOM)||'[]');custom.forEach(n=>{if(!ALL_NEWS.find(x=>x.id===n.id))ALL_NEWS.unshift(n);});}catch(e){}
+  try{const hesp=JSON.parse(localStorage.getItem(LS_HESP_CACHE)||'[]');hesp.forEach(n=>{if(!ALL_NEWS.find(x=>x.id===n.id))ALL_NEWS.push(n);});}catch(e){}
 }
 
 // ============================================================
-// HESPRESS RSS FETCHER
+// MULTI-SOURCE RSS: hespress.com + goud.ma + telquel.ma
+// Maps to categories by content analysis
 // ============================================================
-const HESP_CATS = {
+const RSS_SOURCES=[
+  {url:'https://www.hespress.com/feed',source:'hespress.com',label:'هسبريس',badge:'hespress'},
+  {url:'https://www.hespress.com/sport/feed',source:'hespress.com',label:'هسبريس رياضة',badge:'hespress'},
+  {url:'https://www.hespress.com/monde/feed',source:'hespress.com',label:'هسبريس عالم',badge:'hespress'},
+  {url:'https://www.hespress.com/economie/feed',source:'hespress.com',label:'هسبريس اقتصاد',badge:'hespress'},
+  {url:'https://goud.ma/feed/',source:'goud.ma',label:'جود',badge:'goud'},
+  {url:'https://telquel.ma/feed/',source:'telquel.ma',label:'تيلكيل',badge:'tele'},
+];
+
+const HESP_CATS={
   'المغرب':'morocco','الاقتصاد':'economy','السياسة':'morocco','الرياضة':'sports',
   'التكنولوجيا':'tech','الصحة':'health','الثقافة':'culture','العالم':'world',
   'الجريمة':'morocco','القضاء':'morocco','حوادث':'morocco','المجتمع':'morocco',
   'عاجل':'morocco','الفن':'culture','السينما':'culture'
 };
 
-function mapHespCat(title, catStr){
-  if(!catStr) catStr='';
-  const combined = (title+' '+catStr).toLowerCase();
-  if(combined.includes('رياض')||combined.includes('كرة')||combined.includes('ملاكم')||combined.includes('أولمبي')) return 'sports';
-  if(combined.includes('اقتصاد')||combined.includes('بورصة')||combined.includes('درهم')||combined.includes('استثمار')) return 'economy';
-  if(combined.includes('تكنولوج')||combined.includes('ذكاء اصطناعي')||combined.includes('إنترنت')||combined.includes('هاتف')) return 'tech';
-  if(combined.includes('صحة')||combined.includes('مرض')||combined.includes('مستشفى')||combined.includes('وباء')) return 'health';
-  if(combined.includes('ثقافة')||combined.includes('فن')||combined.includes('سينما')||combined.includes('مهرجان')) return 'culture';
-  if(combined.includes('عالم')||combined.includes('دولي')||combined.includes('أمريكا')||combined.includes('أوروبا')) return 'world';
-  for(const [k,v] of Object.entries(HESP_CATS)){ if(catStr.includes(k)) return v; }
+function mapHespCat(title,catStr){
+  if(!catStr)catStr='';
+  const combined=(title+' '+catStr).toLowerCase();
+  if(combined.includes('رياض')||combined.includes('كرة')||combined.includes('ملاكم')||combined.includes('أولمبي'))return 'sports';
+  if(combined.includes('اقتصاد')||combined.includes('بورصة')||combined.includes('درهم')||combined.includes('استثمار'))return 'economy';
+  if(combined.includes('تكنولوج')||combined.includes('ذكاء اصطناعي')||combined.includes('إنترنت')||combined.includes('هاتف'))return 'tech';
+  if(combined.includes('صحة')||combined.includes('مرض')||combined.includes('مستشفى')||combined.includes('وباء'))return 'health';
+  if(combined.includes('ثقافة')||combined.includes('فن')||combined.includes('سينما')||combined.includes('مهرجان'))return 'culture';
+  if(combined.includes('عالم')||combined.includes('دولي')||combined.includes('أمريكا')||combined.includes('أوروبا'))return 'world';
+  if(combined.includes('رأي')||combined.includes('تحليل')||combined.includes('مقال'))return 'opinion';
+  for(const[k,v]of Object.entries(HESP_CATS)){if(catStr.includes(k))return v;}
   return 'morocco';
 }
 
@@ -990,66 +1090,101 @@ function cleanHtml(str){
   return str.replace(/<[^>]+>/g,'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#039;/g,"'").replace(/&nbsp;/g,' ').trim();
 }
 
-async function fetchHespress(){
-  const now = Date.now();
-  const lastTs = parseInt(localStorage.getItem(LS_HESP_TS)||'0');
-  if(now - lastTs < HESPRESS_INTERVAL) return;
+async function fetchAllSources(){
+  const now=Date.now();
+  const lastTs=parseInt(localStorage.getItem(LS_HESP_TS)||'0');
+  if(now-lastTs<HESPRESS_INTERVAL)return;
 
-  const feeds = [
-    'https://www.hespress.com/feed',
-    'https://www.hespress.com/sport/feed',
-  ];
+  let totalNew=0;
+  const existingIds=new Set(ALL_NEWS.map(n=>n.id));
+  const allNewItems=[];
 
-  let newCount = 0;
-  for(const feedUrl of feeds){
+  for(const src of RSS_SOURCES){
     try{
-      const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(feedUrl);
-      const res = await fetch(proxy, {signal: AbortSignal.timeout(12000)});
-      if(!res.ok) continue;
-      const data = await res.json();
-      const xml = data.contents||'';
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(xml, 'application/xml');
-      const items = Array.from(doc.querySelectorAll('item')).slice(0,20);
-      const existingIds = new Set(ALL_NEWS.map(n=>n.id));
-      const newItems = [];
+      const proxy='https://api.allorigins.win/get?url='+encodeURIComponent(src.url);
+      const res=await fetch(proxy,{signal:AbortSignal.timeout(12000)});
+      if(!res.ok)continue;
+      const data=await res.json();
+      const xml=data.contents||'';
+      const parser=new DOMParser();
+      const doc=parser.parseFromString(xml,'application/xml');
+      const items=Array.from(doc.querySelectorAll('item')).slice(0,20);
       items.forEach((item,i)=>{
-        const title = cleanHtml(item.querySelector('title')?.textContent||'');
-        const link = item.querySelector('link')?.textContent||'';
-        const desc = cleanHtml(item.querySelector('description')?.textContent||'');
-        const pubDate = item.querySelector('pubDate')?.textContent||'';
-        const catEl = item.querySelector('category')?.textContent||'';
-        if(!title||title.length<10) return;
-        const itemId = 'hesp_' + btoa(encodeURIComponent(title.slice(0,30))).replace(/[^a-z0-9]/gi,'').slice(0,20);
-        if(existingIds.has(itemId)) return;
-        const cat = mapHespCat(title, catEl);
-        const ts = pubDate ? new Date(pubDate).getTime() : Date.now() - (i*600000);
-        const body = `<p>${desc||title}</p><p><a href="${link}" target="_blank" rel="noopener" style="color:var(--red)">اقرأ المقال الكامل على هسبريس</a></p>`;
-        // Use picsum for safe images, seeded by item index
-        const imgSeed = Math.abs(title.charCodeAt(0)+title.charCodeAt(1)+i*7) % 1000;
-        const img = getCatImage(cat, Math.floor(Math.random()*4));
-        newItems.push({
-          id:itemId, cat, title, img, time:ts, views:Math.floor(Math.random()*12000)+500,
-          source:'hespress.com', sourceLabel:'هسبريس', body, isHespress:true
+        const title=cleanHtml(item.querySelector('title')?.textContent||'');
+        const link=item.querySelector('link')?.textContent||'';
+        const desc=cleanHtml(item.querySelector('description')?.textContent||'');
+        const pubDate=item.querySelector('pubDate')?.textContent||'';
+        const catEl=item.querySelector('category')?.textContent||'';
+        if(!title||title.length<10)return;
+        const itemId=src.badge+'_'+btoa(encodeURIComponent(title.slice(0,30))).replace(/[^a-z0-9]/gi,'').slice(0,20);
+        if(existingIds.has(itemId))return;
+        const cat=mapHespCat(title,catEl);
+        const ts=pubDate?new Date(pubDate).getTime():Date.now()-(i*600000);
+        const body=`<p>${desc||title}</p><p><a href="${link}" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">⬅ اقرأ المقال الكامل على ${src.label}</a></p>`;
+        const img=getCatImage(cat,Math.floor(Math.random()*4));
+        allNewItems.push({
+          id:itemId,cat,title,img,time:ts,
+          views:Math.floor(Math.random()*12000)+500,
+          source:src.source,sourceLabel:src.label,sourceBadge:src.badge,
+          body,isExternal:true,externalLink:link
         });
         existingIds.add(itemId);
-        newCount++;
+        totalNew++;
       });
-      if(newItems.length>0){
-        newItems.sort((a,b)=>b.time-a.time);
-        ALL_NEWS = [...newItems, ...ALL_NEWS];
-        // Cache
-        const cached = ALL_NEWS.filter(n=>n.isHespress).slice(0,80);
-        localStorage.setItem(LS_HESP_CACHE, JSON.stringify(cached));
-      }
-    }catch(e){ console.warn('Hespress feed error:', e.message); }
+    }catch(e){console.warn('RSS error '+src.url+':',e.message);}
   }
-  localStorage.setItem(LS_HESP_TS, now.toString());
-  if(newCount>0){
-    buildTicker();
-    if(currentPage==='home') renderHome();
-    showToast('تم تحديث الأخبار من هسبريس (' + newCount + ' خبر جديد)');
+
+  if(allNewItems.length>0){
+    allNewItems.sort((a,b)=>b.time-a.time);
+    ALL_NEWS=[...allNewItems,...ALL_NEWS];
+    const cached=ALL_NEWS.filter(n=>n.isExternal).slice(0,120);
+    localStorage.setItem(LS_HESP_CACHE,JSON.stringify(cached));
   }
+  localStorage.setItem(LS_HESP_TS,now.toString());
+  if(totalNew>0){buildTicker();if(currentPage==='home')renderHome();showToast(`✅ ${totalNew} خبر جديد من هسبريس وجود وتيلكيل`);}
+}
+
+// ============================================================
+// TRANSLATION ENGINE
+// ============================================================
+const LANG_CODES={ar:'ar',fr:'fr',en:'en',es:'es'};
+const LANG_NAMES={ar:'العربية',fr:'Français',en:'English',es:'Español'};
+const UI_TRANSLATIONS={
+  ar:{breaking:'عاجل',searchPlaceholder:'ابحث عن خبر...',searchBtn:'بحث',mostRead:'الأكثر قراءة',latestNews:'آخر الأخبار',mainNews:'الخبر الرئيسي',live:'مباشر',viewAll:'عرض الكل',opinion:'الرأي والتحليل',weather:'الطقس',comments:'آخر التعليقات',tags:'الوسوم الشائعة',ago_min:'د',ago_hr:'س',ago_day:'ي',share:'مشاركة',related:'أخبار ذات صلة',loading:'جاري التحميل...',noResults:'لا توجد نتائج',tagline:'ننقل الخبر بسرعة ومصداقية',logoName:'مشهد اليوم'},
+  fr:{breaking:'FLASH',searchPlaceholder:'Rechercher...',searchBtn:'Chercher',mostRead:'Les plus lus',latestNews:'Dernières nouvelles',mainNews:'À la une',live:'En direct',viewAll:'Voir tout',opinion:'Opinion',weather:'Météo',comments:'Commentaires',tags:'Mots-clés',ago_min:'min',ago_hr:'h',ago_day:'j',share:'Partager',related:'Similaires',loading:'Chargement...',noResults:'Aucun résultat',tagline:"L'actualité du Maroc",logoName:'Mashhad Alyawm'},
+  en:{breaking:'BREAKING',searchPlaceholder:'Search news...',searchBtn:'Search',mostRead:'Most Read',latestNews:'Latest News',mainNews:'Top Story',live:'LIVE',viewAll:'View all',opinion:'Opinion',weather:'Weather',comments:'Comments',tags:'Tags',ago_min:'m',ago_hr:'h',ago_day:'d',share:'Share',related:'Related',loading:'Loading...',noResults:'No results',tagline:'Morocco news fast',logoName:'Mashhad Alyawm'},
+  es:{breaking:'URGENTE',searchPlaceholder:'Buscar noticias...',searchBtn:'Buscar',mostRead:'Más leídos',latestNews:'Últimas noticias',mainNews:'Principal',live:'EN VIVO',viewAll:'Ver todo',opinion:'Opinión',weather:'Clima',comments:'Comentarios',tags:'Etiquetas',ago_min:'min',ago_hr:'h',ago_day:'d',share:'Compartir',related:'Relacionadas',loading:'Cargando...',noResults:'Sin resultados',tagline:'Noticias de Marruecos',logoName:'Mashhad Alyawm'},
+};
+
+async function translateText(text,targetLang){
+  if(targetLang==='ar')return text;
+  const cacheKey=targetLang+':'+text.slice(0,80);
+  if(translationCache[cacheKey])return translationCache[cacheKey];
+  try{
+    const url=`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text.slice(0,500))}&langpair=ar|${targetLang}`;
+    const res=await fetch(url,{signal:AbortSignal.timeout(8000)});
+    const data=await res.json();
+    const translated=data?.responseData?.translatedText||text;
+    translationCache[cacheKey]=translated;
+    return translated;
+  }catch(e){return text;}
+}
+
+async function translateNewsTitles(targetLang){
+  if(targetLang==='ar')return;
+  const untranslated=ALL_NEWS.filter(n=>!n['title_'+targetLang]);
+  const batch=untranslated.slice(0,30);
+  for(let i=0;i<batch.length;i++){
+    try{
+      batch[i]['title_'+targetLang]=await translateText(batch[i].title,targetLang);
+      if(i%5===4)await new Promise(r=>setTimeout(r,300));
+    }catch(e){}
+  }
+}
+
+function getTitle(news){
+  if(currentLang==='ar')return news.title;
+  return news['title_'+currentLang]||news.title;
 }
 
 // ============================================================
@@ -1058,102 +1193,148 @@ async function fetchHespress(){
 const AR_DAYS=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 const AR_MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 
-function getArabicDate(d=new Date()){
-  return `${AR_DAYS[d.getDay()]}، ${d.getDate()} ${AR_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
-}
+function getArabicDate(d=new Date()){return `${AR_DAYS[d.getDay()]}، ${d.getDate()} ${AR_MONTHS[d.getMonth()]} ${d.getFullYear()}`;}
 function getFormattedDate(){
-  const d = new Date();
-  if(currentLang==='fr') return d.toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  if(currentLang==='en') return d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  if(currentLang==='es') return d.toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const d=new Date();
+  if(currentLang==='fr')return d.toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  if(currentLang==='en')return d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  if(currentLang==='es')return d.toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   return getArabicDate();
 }
-
 function timeAgo(ts){
-  const diff = Math.floor((Date.now()-ts)/1000);
-  if(diff<3600) return Math.floor(diff/60)+'د';
-  if(diff<86400) return Math.floor(diff/3600)+'س';
-  return Math.floor(diff/86400)+'ي';
+  const ui=UI_TRANSLATIONS[currentLang]||UI_TRANSLATIONS.ar;
+  const diff=Math.floor((Date.now()-ts)/1000);
+  if(diff<3600)return Math.floor(diff/60)+' '+ui.ago_min;
+  if(diff<86400)return Math.floor(diff/3600)+' '+ui.ago_hr;
+  return Math.floor(diff/86400)+' '+ui.ago_day;
 }
-
-function updateDate(){
-  const el = document.getElementById('currentDate');
-  if(el) el.textContent = getFormattedDate();
-}
+function updateDate(){const el=document.getElementById('currentDate');if(el)el.textContent=getFormattedDate();}
 
 // ============================================================
 // WEATHER
 // ============================================================
-const MOROCCO_CITIES = [
-  {id:'Rabat',label:'الرباط'},
-  {id:'Casablanca',label:'البيضاء'},
-  {id:'Marrakech',label:'مراكش'},
-  {id:'Fes',label:'فاس'},
-  {id:'Tangier',label:'طنجة'},
-  {id:'Agadir',label:'أكادير'},
+const MOROCCO_CITIES=[
+  {id:'Rabat',label:'الرباط'},{id:'Casablanca',label:'البيضاء'},
+  {id:'Marrakech',label:'مراكش'},{id:'Fes',label:'فاس'},
+  {id:'Tangier',label:'طنجة'},{id:'Agadir',label:'أكادير'},
+  {id:'Oujda',label:'وجدة'},{id:'Tetouan',label:'تطوان'},
 ];
 
+function getWeatherIcon(code){
+  const wc=parseInt(code||800);
+  if(wc>=200&&wc<300)return'⛈️';
+  if(wc>=300&&wc<600)return'🌧️';
+  if(wc>=600&&wc<700)return'❄️';
+  if(wc>=700&&wc<800)return'🌫️';
+  if(wc===800)return'☀️';
+  if(wc===801||wc===802)return'🌤️';
+  return'⛅';
+}
+
+function getUVDesc(uv){
+  const u=parseInt(uv||0);
+  if(u<=2)return{label:'منخفض',color:'#4caf50'};
+  if(u<=5)return{label:'معتدل',color:'#ffeb3b'};
+  if(u<=7)return{label:'مرتفع',color:'#ff9800'};
+  if(u<=10)return{label:'مرتفع جداً',color:'#f44336'};
+  return{label:'شديد الخطورة',color:'#9c27b0'};
+}
+
+function getAQIDesc(aqi){
+  if(!aqi)return{label:'جيد',color:'#4caf50',num:1};
+  const n=parseInt(aqi);
+  if(n<=50)return{label:'ممتاز',color:'#4caf50',num:1};
+  if(n<=100)return{label:'جيد',color:'#8bc34a',num:2};
+  if(n<=150)return{label:'مقبول',color:'#ffeb3b',num:3};
+  if(n<=200)return{label:'غير صحي',color:'#ff9800',num:4};
+  if(n<=300)return{label:'خطير',color:'#f44336',num:5};
+  return{label:'خطير جداً',color:'#9c27b0',num:6};
+}
+
 async function fetchWeather(city='Rabat'){
-  const cacheKey = LS_WX_CACHE+'_'+city;
-  const tsKey = LS_WX_TS+'_'+city;
-  const now = Date.now();
-  const lastTs = parseInt(localStorage.getItem(tsKey)||'0');
-  if(now-lastTs<WEATHER_INTERVAL){
-    try{ return JSON.parse(localStorage.getItem(cacheKey)); }catch(e){}
-  }
+  const cacheKey=LS_WX_CACHE+'_'+city;
+  const tsKey=LS_WX_TS+'_'+city;
+  const now=Date.now();
+  const lastTs=parseInt(localStorage.getItem(tsKey)||'0');
+  if(now-lastTs<WEATHER_INTERVAL){try{const cached=JSON.parse(localStorage.getItem(cacheKey));if(cached)return cached;}catch(e){}}
   try{
-    const res = await fetch('https://wttr.in/'+encodeURIComponent(city)+'?format=j1', {signal:AbortSignal.timeout(8000)});
-    const d = await res.json();
-    const cur = d.current_condition[0];
-    const wc = parseInt(cur.weatherCode);
-    const icon = wc>=200&&wc<300?'⛈️':wc>=300&&wc<600?'🌧️':wc>=600&&wc<700?'❄️':wc>=700&&wc<800?'🌫️':wc===800?'☀️':'⛅';
-    const wd = {
-      city, temp:cur.temp_C, feelsLike:cur.FeelsLikeC,
+    const res=await fetch('https://wttr.in/'+encodeURIComponent(city)+'?format=j1',{signal:AbortSignal.timeout(10000)});
+    const d=await res.json();
+    const cur=d.current_condition[0];
+    const wc=parseInt(cur.weatherCode||800);
+    const icon=getWeatherIcon(wc);
+
+    // Build hourly data from today
+    const todayHourly=(d.weather[0]?.hourly||[]).map(h=>({
+      time:h.time==='0'?'12ص':h.time==='300'?'3ص':h.time==='600'?'6ص':h.time==='900'?'9ص':h.time==='1200'?'12ظ':h.time==='1500'?'3م':h.time==='1800'?'6م':h.time==='2100'?'9م':h.time,
+      temp:h.tempC,feelsLike:h.FeelsLikeC,
+      icon:getWeatherIcon(h.weatherCode),
+      desc:h.weatherDesc?.[0]?.value||'',
+      humidity:h.humidity,wind:h.windspeedKmph,
+      chanceRain:h.chanceofrain||'0',
+      visibility:h.visibility,pressure:h.pressure,
+    }));
+
+    const wd={
+      city,
+      temp:cur.temp_C,feelsLike:cur.FeelsLikeC,
       desc:icon+' '+cur.weatherDesc[0].value,
-      humidity:cur.humidity, wind:cur.windspeedKmph, visibility:cur.visibility,
-      uv:cur.uvIndex||'N/A',
-      forecast: d.weather.slice(0,7).map((w,i)=>{
-        const dt = new Date(w.date);
-        const wc2 = parseInt(w.hourly[4]?.weatherCode||800);
-        const ic2 = wc2>=300&&wc2<600?'🌧️':wc2>=200&&wc2<300?'⛈️':wc2===800?'☀️':'⛅';
-        return {
-          day: AR_DAYS[dt.getDay()], date:w.date,
-          max:w.maxtempC, min:w.mintempC, icon:ic2,
+      humidity:cur.humidity,wind:cur.windspeedKmph,
+      windDir:cur.winddir16Point||'N',
+      visibility:cur.visibility,uv:cur.uvIndex||'3',
+      pressure:cur.pressure||'1013',
+      cloudcover:cur.cloudcover||'50',
+      dewPoint:cur.DewPointC||'15',
+      icon,weatherCode:wc,
+      hourly:todayHourly,
+      forecast:d.weather.slice(0,7).map((w,i)=>{
+        const dt=new Date(w.date);
+        const wc2=parseInt(w.hourly[4]?.weatherCode||800);
+        const ic2=getWeatherIcon(wc2);
+        return{
+          day:AR_DAYS[dt.getDay()],date:w.date,
+          max:w.maxtempC,min:w.mintempC,icon:ic2,
           desc:w.hourly[4]?.weatherDesc?.[0]?.value||'',
           humidity:w.hourly[4]?.humidity||'--',
           wind:w.hourly[4]?.windspeedKmph||'--',
           morning:w.hourly[2]?.tempC||'--',
           afternoon:w.hourly[4]?.tempC||'--',
-          evening:w.hourly[6]?.tempC||'--'
+          evening:w.hourly[6]?.tempC||'--',
+          chanceRain:w.hourly[4]?.chanceofrain||'0',
+          sunrise:w.astronomy?.[0]?.sunrise||'06:00 AM',
+          sunset:w.astronomy?.[0]?.sunset||'07:30 PM',
+          moonrise:w.astronomy?.[0]?.moonrise||'09:00 PM',
+          moonset:w.astronomy?.[0]?.moonset||'07:00 AM',
+          moonPhase:w.astronomy?.[0]?.moon_phase||'',
+          uv:w.uvIndex||'5',
         };
       })
     };
-    localStorage.setItem(cacheKey, JSON.stringify(wd));
-    localStorage.setItem(tsKey, now.toString());
-    weatherCache[city] = wd;
+    localStorage.setItem(cacheKey,JSON.stringify(wd));
+    localStorage.setItem(tsKey,now.toString());
+    weatherCache[city]=wd;
     return wd;
   }catch(e){
-    return {
-      city, temp:'24', feelsLike:'22', desc:'⛅ غائم جزئياً',
-      humidity:'65', wind:'18', visibility:'10', uv:'5',
-      forecast: AR_DAYS.map((d,i)=>({day:d,max:String(24+Math.floor(Math.random()*8)),min:String(16+Math.floor(Math.random()*4)),icon:i%3===0?'🌧️':'☀️',desc:'جيد',humidity:'60',wind:'15',morning:'20',afternoon:'26',evening:'22'}))
+    // Fallback data
+    const wd={city,temp:'24',feelsLike:'22',desc:'⛅ غائم جزئياً',humidity:'65',wind:'18',windDir:'NW',visibility:'10',uv:'5',pressure:'1013',cloudcover:'40',dewPoint:'14',icon:'⛅',hourly:[],
+      forecast:AR_DAYS.map((dy,i)=>({day:dy,max:String(22+Math.floor(Math.random()*10)),min:String(14+Math.floor(Math.random()*6)),icon:i%3===0?'🌧️':i%4===0?'⛅':'☀️',desc:'جيد',humidity:'60',wind:'15',morning:'19',afternoon:'25',evening:'21',chanceRain:'10',sunrise:'06:00 AM',sunset:'07:30 PM',moonrise:'09:00 PM',moonset:'07:00 AM',moonPhase:'First Quarter',uv:'5'}))
     };
+    weatherCache[city]=wd;
+    return wd;
   }
 }
 
-async function getWeatherData(city){
-  if(weatherCache[city]) return weatherCache[city];
-  return await fetchWeather(city);
-}
-
+// ============================================================
+// SIDEBAR WEATHER WIDGET (compact)
+// ============================================================
 function weatherWidget(){
-  const wd = weatherCache[currentWeatherCity];
-  if(!wd) return `<div class="sidebar-widget weather-widget"><div class="widget-title"><i class="fas fa-cloud-sun"></i> الطقس</div><div style="text-align:center;padding:20px"><i class="fas fa-spinner fa-spin" style="font-size:24px;opacity:0.5"></i></div></div>`;
-  const cityLabel = MOROCCO_CITIES.find(c=>c.id===currentWeatherCity)?.label||currentWeatherCity;
-  const fc = wd.forecast||[];
-  const tab = fc[currentWeatherTab]||fc[0]||{};
-  const cityBtns = MOROCCO_CITIES.map(c=>`<button class="wcity-btn${c.id===currentWeatherCity?' active':''}" onclick="changeWeatherCity('${c.id}')">${c.label}</button>`).join('');
-  const tabs = fc.map((d,i)=>`<button class="wtab${i===currentWeatherTab?' active':''}" onclick="setWeatherTab(${i})">${d.day.slice(0,3)}</button>`).join('');
+  const wd=weatherCache[currentWeatherCity];
+  if(!wd)return `<div class="sidebar-widget weather-widget"><div class="widget-title"><i class="fas fa-cloud-sun"></i> الطقس</div><div style="text-align:center;padding:20px"><i class="fas fa-spinner fa-spin" style="font-size:24px;opacity:0.5"></i></div></div>`;
+  const cityLabel=MOROCCO_CITIES.find(c=>c.id===currentWeatherCity)?.label||currentWeatherCity;
+  const fc=wd.forecast||[];
+  const tab=fc[currentWeatherTab]||fc[0]||{};
+  const cityBtns=MOROCCO_CITIES.slice(0,6).map(c=>`<button class="wcity-btn${c.id===currentWeatherCity?' active':''}" onclick="changeWeatherCity('${c.id}')">${c.label}</button>`).join('');
+  const tabs=fc.slice(0,7).map((d,i)=>`<button class="wtab${i===currentWeatherTab?' active':''}" onclick="setWeatherTab(${i})">${d.day.slice(0,3)}</button>`).join('');
   return `<div class="sidebar-widget weather-widget">
     <div class="widget-title"><i class="fas fa-cloud-sun"></i> الطقس — ${cityLabel}</div>
     <div class="weather-city-selector">${cityBtns}</div>
@@ -1171,800 +1352,844 @@ function weatherWidget(){
       <div class="wdd-row"><span>الصباح</span><span>${tab.morning||'--'}°</span></div>
       <div class="wdd-row"><span>الظهيرة</span><span>${tab.afternoon||'--'}°</span></div>
       <div class="wdd-row"><span>المساء</span><span>${tab.evening||'--'}°</span></div>
-      <div class="wdd-row" style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.1)"><span><i class="fas fa-tint"></i> رطوبة</span><span>${tab.humidity||'--'}%</span></div>
+      <div class="wdd-row" style="padding-top:5px;border-top:1px solid rgba(255,255,255,0.1)"><span><i class="fas fa-tint"></i> رطوبة</span><span>${tab.humidity||'--'}%</span></div>
       <div class="wdd-row"><span><i class="fas fa-wind"></i> ريح</span><span>${tab.wind||'--'}km/h</span></div>
+      <div class="wdd-row"><span><i class="fas fa-umbrella"></i> احتمال مطر</span><span>${tab.chanceRain||'0'}%</span></div>
     </div>
+    <div style="margin-top:10px;text-align:center"><button onclick="navigate('weather')" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:#fff;padding:6px 14px;border-radius:20px;font-family:var(--font-main);font-size:11px;cursor:pointer;font-weight:600">🌍 تفاصيل كاملة</button></div>
   </div>`;
 }
 
 function changeWeatherCity(city){
-  currentWeatherCity = city;
-  currentWeatherTab = 0;
-  if(!weatherCache[city]){
-    fetchWeather(city).then(wd=>{
-      weatherCache[city]=wd;
-      if(currentPage==='home'||currentPage==='weather') refreshSidebar();
-    });
-  } else { refreshSidebar(); }
+  currentWeatherCity=city;currentWeatherTab=0;
+  if(!weatherCache[city]){fetchWeather(city).then(wd=>{weatherCache[city]=wd;refreshSidebar();if(currentPage==='weather')renderWeatherPage();});}
+  else{refreshSidebar();if(currentPage==='weather')renderWeatherPage();}
 }
+function setWeatherTab(i){currentWeatherTab=i;refreshSidebar();}
+function refreshSidebar(){const s=document.querySelector('.sidebar');if(s)s.innerHTML=buildSidebar();}
 
-function setWeatherTab(i){
-  currentWeatherTab = i;
-  refreshSidebar();
-}
-
-function refreshSidebar(){
-  const s = document.querySelector('.sidebar');
-  if(s) s.innerHTML = buildSidebar();
+// ============================================================
+// ADSENSE
+// ============================================================
+function adSlot(type,slotId){
+  const pid=getSettings().adsensePid||'ca-pub-XXXXXXXXXXXXXXXXX';
+  const classes={leaderboard:'adsense-leaderboard',rectangle:'adsense-rectangle',banner:'adsense-banner'};
+  return `<div class="adsense-slot ${classes[type]||''}"><span class="adsense-label">إعلان</span><ins class="adsbygoogle" style="display:block" data-ad-client="${pid}" data-ad-slot="${slotId||'0000000000'}" data-ad-format="auto" data-full-width-responsive="true"></ins></div>`;
 }
 
 // ============================================================
-// ADSENSE SLOT HELPER
+// SOURCE BADGE
 // ============================================================
-function adSlot(type, slotId){
-  const pid = getSettings().adsensePid||'ca-pub-XXXXXXXXXXXXXXXXX';
-  const sizes = {leaderboard:'728,90',rectangle:'300,250',banner:'468,60'};
-  const classes = {leaderboard:'adsense-leaderboard',rectangle:'adsense-rectangle',banner:'adsense-banner'};
-  const size = sizes[type]||'320,100';
-  return `<div class="adsense-slot ${classes[type]||''}">
-    <span class="adsense-label">إعلان</span>
-    <ins class="adsbygoogle" style="display:block" data-ad-client="${pid}" data-ad-slot="${slotId||'0000000000'}" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle=window.adsbygoogle||[]).push({});<\/script>
-  </div>`;
+function sourceBadge(n){
+  if(!n.isExternal&&!n.isHespress)return`<span class="source-badge maroc">maroc.ma</span>`;
+  const badge=n.sourceBadge||'hespress';
+  return`<span class="source-badge ${badge}">${n.sourceLabel||n.source||''}</span>`;
 }
 
 // ============================================================
 // TICKER
 // ============================================================
 function buildTicker(){
-  const ticker = document.getElementById('ticker');
-  if(!ticker) return;
-  const recent = ALL_NEWS.filter(n=>n.time>Date.now()-86400000*3).slice(0,14);
-  const items = (recent.length>0?recent:ALL_NEWS.slice(0,8))
-    .map(n=>`<span class="ticker-item" onclick="showArticle('${n.id}')">${n.title}<span class="ticker-source">${n.sourceLabel||n.source||''}</span></span>`).join('');
-  ticker.innerHTML = items + items;
+  const ticker=document.getElementById('ticker');if(!ticker)return;
+  const recent=ALL_NEWS.filter(n=>n.time>Date.now()-86400000*3).slice(0,14);
+  const items=(recent.length>0?recent:ALL_NEWS.slice(0,8)).map(n=>`<span class="ticker-item" onclick="showArticle('${n.id}')">${getTitle(n)}<span class="ticker-source">${n.sourceLabel||n.source||''}</span></span>`).join('');
+  ticker.innerHTML=items+items;
+  const lbl=document.getElementById('breakingLabelText');
+  if(lbl)lbl.textContent=(UI_TRANSLATIONS[currentLang]||UI_TRANSLATIONS.ar).breaking;
 }
 
 // ============================================================
 // NAV
 // ============================================================
+function getCatLabel(cat){
+  const ui=UI_TRANSLATIONS[currentLang]||UI_TRANSLATIONS.ar;
+  if(cat.id==='weather')return ui.weather;
+  if(cat.id==='opinion')return ui.opinion;
+  return cat.label;
+}
+
 function buildNav(){
-  const mainNL = document.getElementById('mainNavList');
-  if(mainNL){
-    mainNL.innerHTML = CATEGORIES.map(c=>`
-      <li class="nav-item${c.id===currentPage?' active':''}${c.id==='home'?' home':''}">
-        <a href="#" onclick="navigate('${c.id}');return false;"><i class="${c.icon}"></i> ${c.label}</a>
-      </li>`).join('');
-  }
-  const snavList = document.getElementById('snavList');
-  if(snavList){
-    snavList.innerHTML = `<div class="snav-section-label">الأقسام</div>` +
-      CATEGORIES.map(c=>`<div class="snav-item${c.id===currentPage?' active':''}" onclick="navigate('${c.id}');closeSidebarNav();">
-        <i class="${c.icon}"></i>${c.label}
-      </div>`).join('') +
-      `<div class="snav-divider"></div>
-      <div class="snav-section-label">إعدادات</div>
-      <div class="snav-item" onclick="toggleDark();closeSidebarNav();"><i class="fas fa-moon"></i>الوضع الليلي</div>
-      <div class="snav-item" onclick="openAdminModal();closeSidebarNav();"><i class="fas fa-shield-alt"></i>لوحة التحكم</div>`;
-  }
-  const footerSec = document.getElementById('footerSections');
-  if(footerSec){
-    footerSec.innerHTML = CATEGORIES.filter(c=>c.id!=='home').map(c=>`<a href="#" onclick="navigate('${c.id}');return false;">${c.label}</a>`).join('');
-  }
+  const mainNL=document.getElementById('mainNavList');
+  if(mainNL)mainNL.innerHTML=CATEGORIES.map(c=>`<li class="nav-item${c.id===currentPage?' active':''}${c.id==='home'?' home':''}"><a href="#" onclick="navigate('${c.id}');return false;"><i class="${c.icon}"></i> ${getCatLabel(c)}</a></li>`).join('');
+  const snavList=document.getElementById('snavList');
+  if(snavList)snavList.innerHTML=`<div class="snav-section-label">الأقسام</div>`+CATEGORIES.map(c=>`<div class="snav-item${c.id===currentPage?' active':''}" onclick="navigate('${c.id}');closeSidebarNav();"><i class="${c.icon}"></i>${getCatLabel(c)}</div>`).join('')+`<div class="snav-divider"></div><div class="snav-section-label">إعدادات</div><div class="snav-item" onclick="toggleDark();closeSidebarNav();"><i class="fas fa-moon"></i>الوضع الليلي</div>`;
+  const footerSec=document.getElementById('footerSections');
+  if(footerSec)footerSec.innerHTML=CATEGORIES.filter(c=>c.id!=='home').map(c=>`<a href="#" onclick="navigate('${c.id}');return false;">${getCatLabel(c)}</a>`).join('');
+  const ui=UI_TRANSLATIONS[currentLang]||UI_TRANSLATIONS.ar;
+  const si=document.getElementById('searchInput');if(si)si.placeholder=ui.searchPlaceholder;
+  const lbl=document.getElementById('breakingLabelText');if(lbl)lbl.textContent=ui.breaking;
+  const dirs={ar:'rtl',fr:'ltr',en:'ltr',es:'ltr'};
+  document.getElementById('htmlRoot').dir=dirs[currentLang]||'rtl';
 }
 
 // ============================================================
 // SIDEBAR
 // ============================================================
 function buildSidebar(){
-  const mostRead = [...ALL_NEWS].sort((a,b)=>b.views-a.views).slice(0,5);
-  const tags = [...new Set(ALL_NEWS.map(n=>CATEGORIES.find(c=>c.id===n.cat)?.tag||n.cat))].slice(0,12);
-  const mostReadHtml = mostRead.map((n,i)=>`
-    <div class="most-read-item" onclick="showArticle('${n.id}')">
-      <div class="most-read-num">0${i+1}</div>
-      <div>
-        <div class="most-read-title">${n.title}</div>
-        <div style="font-size:10px;color:var(--gray-light);margin-top:2px">${n.sourceLabel||n.source||'maroc.ma'}</div>
-      </div>
-    </div>`).join('');
-  const tagsHtml = tags.map(tg=>`<span class="tag">${tg}</span>`).join('');
-  return `
-  ${weatherWidget()}
+  const ui=UI_TRANSLATIONS[currentLang]||UI_TRANSLATIONS.ar;
+  const mostRead=[...ALL_NEWS].sort((a,b)=>b.views-a.views).slice(0,5);
+  const tags=[...new Set(ALL_NEWS.map(n=>CATEGORIES.find(c=>c.id===n.cat)?.tag||n.cat))].slice(0,12);
+  const mostReadHtml=mostRead.map((n,i)=>`<div class="most-read-item" onclick="showArticle('${n.id}')"><div class="most-read-num">0${i+1}</div><div><div class="most-read-title">${getTitle(n)}</div><div style="font-size:10px;color:var(--gray-light);margin-top:2px">${n.sourceLabel||n.source||'maroc.ma'}</div></div></div>`).join('');
+  const tagsHtml=tags.map(tg=>`<span class="tag">${tg}</span>`).join('');
+  return `${weatherWidget()}
   ${adSlot('rectangle','1234567890')}
-  <div class="sidebar-widget">
-    <div class="widget-title"><i class="fas fa-fire"></i> الأكثر قراءة</div>
-    ${mostReadHtml}
-  </div>
+  <div class="sidebar-widget"><div class="widget-title"><i class="fas fa-fire"></i> ${ui.mostRead}</div>${mostReadHtml}</div>
   ${adSlot('banner','1111111111')}
-  <div class="sidebar-widget">
-    <div class="widget-title"><i class="fas fa-comments"></i> آخر التعليقات</div>
-    <div class="comment-item">
-      <div class="comment-avatar">م</div>
-      <div><div class="comment-user">محمد الأمين</div><div class="comment-text">أخبار رائعة، المغرب يسير نحو المستقبل</div><div class="comment-time">منذ 12 دقيقة</div></div>
-    </div>
-    <div class="comment-item">
-      <div class="comment-avatar" style="background:#0D2B45">س</div>
-      <div><div class="comment-user">سلمى الحسناوي</div><div class="comment-text">الطاقة المتجددة مستقبلنا بلا شك</div><div class="comment-time">منذ 28 دقيقة</div></div>
-    </div>
-    <div class="comment-item">
-      <div class="comment-avatar" style="background:#2c6e49">ع</div>
-      <div><div class="comment-user">عمر التازي</div><div class="comment-text">شكراً على التغطية المتميزة لهذه الأخبار</div><div class="comment-time">منذ 45 دقيقة</div></div>
-    </div>
+  <div class="sidebar-widget"><div class="widget-title"><i class="fas fa-comments"></i> ${ui.comments}</div>
+    <div class="comment-item"><div class="comment-avatar">م</div><div><div class="comment-user">محمد الأمين</div><div class="comment-text">أخبار رائعة، المغرب يسير نحو المستقبل</div><div class="comment-time">منذ 12 دقيقة</div></div></div>
+    <div class="comment-item"><div class="comment-avatar" style="background:#0D2B45">س</div><div><div class="comment-user">سلمى الحسناوي</div><div class="comment-text">الطاقة المتجددة مستقبلنا بلا شك</div><div class="comment-time">منذ 28 دقيقة</div></div></div>
+    <div class="comment-item"><div class="comment-avatar" style="background:#2c6e49">ع</div><div><div class="comment-user">عمر التازي</div><div class="comment-text">شكراً على التغطية المتميزة</div><div class="comment-time">منذ 45 دقيقة</div></div></div>
   </div>
-  <div class="sidebar-widget">
-    <div class="widget-title"><i class="fas fa-tags"></i> الوسوم الشائعة</div>
-    <div class="tags-list">${tagsHtml}</div>
-  </div>
-  ${adSlot('rectangle','2222222222')}`;
+  <div class="sidebar-widget"><div class="widget-title"><i class="fas fa-tags"></i> ${ui.tags}</div><div class="tags-list">${tagsHtml}</div></div>`;
 }
 
 // ============================================================
 // HOME PAGE
 // ============================================================
 function renderHome(){
-  const sorted = [...ALL_NEWS].sort((a,b)=>b.time-a.time);
-  const hero = sorted[0];
-  const subHero = sorted.slice(1,4);
-  const latestGrid = sorted.slice(0,6);
-
-  const catSections = ['morocco','world','sports','economy'].map(catId=>{
-    const cat = CATEGORIES.find(c=>c.id===catId);
-    const catNews = ALL_NEWS.filter(n=>n.cat===catId).sort((a,b)=>b.time-a.time);
-    if(!catNews.length) return '';
-    const main = catNews[0];
-    const listItems = catNews.slice(1,5).map(n=>`
-      <div class="list-card" onclick="showArticle('${n.id}')">
-        <img src="${n.img}" alt="" loading="lazy" onerror="this.src='${getCatImage(catId,1)}'"/>
-        <div class="list-card-body">
-          <div class="list-card-title">${n.title}</div>
-          <div class="list-card-meta">
-            <span><i class="far fa-clock"></i> ${timeAgo(n.time)}</span>
-            ${n.isHespress?'<span class="source-badge hespress">هسبريس</span>':'<span class="source-badge maroc">maroc.ma</span>'}
-          </div>
-        </div>
-      </div>`).join('');
-    return `<div class="cat-section">
-      <div class="section-header">
-        <div class="section-title"><i class="${cat.icon}" style="color:var(--red)"></i> ${cat.label}</div>
-        <a href="#" class="view-all" onclick="navigate('${catId}');return false;">عرض الكل <i class="fas fa-arrow-left"></i></a>
-      </div>
-      <div class="cat-section-grid">
-        <div class="cat-section-main" onclick="showArticle('${main.id}')">
-          <img src="${main.img}" alt="" loading="lazy" onerror="this.src='${getCatImage(catId,0)}'"/>
-          <div class="cat-section-overlay">
-            <span class="cat-badge">${cat.tag}</span>
-            <h3>${main.title}</h3>
-          </div>
-        </div>
-        <div class="cat-section-list">${listItems}</div>
-      </div>
-    </div>`;
+  const ui=UI_TRANSLATIONS[currentLang]||UI_TRANSLATIONS.ar;
+  const sorted=[...ALL_NEWS].sort((a,b)=>b.time-a.time);
+  const hero=sorted[0];const subHero=sorted.slice(1,4);const latestGrid=sorted.slice(0,6);
+  const catSections=['morocco','world','sports','economy'].map(catId=>{
+    const cat=CATEGORIES.find(c=>c.id===catId);
+    const catNews=ALL_NEWS.filter(n=>n.cat===catId).sort((a,b)=>b.time-a.time);
+    if(!catNews.length)return'';
+    const main=catNews[0];
+    const listItems=catNews.slice(1,5).map(n=>`<div class="list-card" onclick="showArticle('${n.id}')"><img src="${n.img}" alt="" loading="lazy" onerror="this.src='${getCatImage(catId,1)}'"/><div class="list-card-body"><div class="list-card-title">${getTitle(n)}</div><div class="list-card-meta"><span><i class="far fa-clock"></i> ${timeAgo(n.time)}</span>${sourceBadge(n)}</div></div></div>`).join('');
+    return`<div class="cat-section"><div class="section-header"><div class="section-title"><i class="${cat.icon}" style="color:var(--red)"></i> ${getCatLabel(cat)}</div><a href="#" class="view-all" onclick="navigate('${catId}');return false;">${ui.viewAll} <i class="fas fa-arrow-left"></i></a></div><div class="cat-section-grid"><div class="cat-section-main" onclick="showArticle('${main.id}')"><img src="${main.img}" alt="" loading="lazy" onerror="this.src='${getCatImage(catId,0)}'"/><div class="cat-section-overlay"><span class="cat-badge">${cat.tag}</span><h3>${getTitle(main)}</h3></div></div><div class="cat-section-list">${listItems}</div></div></div>`;
   }).join('');
-
-  const opinions = ALL_NEWS.filter(n=>n.cat==='opinion').slice(0,3);
-
-  const html = `<div class="container">
+  const opinions=ALL_NEWS.filter(n=>n.cat==='opinion').slice(0,3);
+  const html=`<div class="container">
     ${adSlot('leaderboard','3333333333')}
     <div class="page-layout">
       <div class="main-column">
         <div class="section-white">
-          <div class="section-header">
-            <div class="section-title"><i class="fas fa-star" style="color:var(--red)"></i> الخبر الرئيسي</div>
-            <span class="live-badge"><span class="pulse"></span>مباشر</span>
-          </div>
+          <div class="section-header"><div class="section-title"><i class="fas fa-star" style="color:var(--red)"></i> ${ui.mainNews}</div><span class="live-badge"><span class="pulse"></span>${ui.live}</span></div>
           <div class="hero-grid">
             <div class="hero-main" onclick="showArticle('${hero.id}')">
-              <img src="${hero.img}" alt="${hero.title}" loading="lazy" onerror="this.src='${getCatImage(hero.cat,0)}'"/>
+              <img src="${hero.img}" alt="${getTitle(hero)}" loading="lazy" onerror="this.src='${getCatImage(hero.cat,0)}'"/>
               <div class="hero-overlay">
                 <span class="hero-cat">${CATEGORIES.find(c=>c.id===hero.cat)?.tag||''}</span>
-                <h1 class="hero-title">${hero.title}</h1>
-                <div class="hero-meta">
-                  <span><i class="far fa-clock"></i> ${timeAgo(hero.time)}</span>
-                  <span><i class="far fa-eye"></i> ${(hero.views||0).toLocaleString()}</span>
-                  ${hero.isHespress?'<span class="source-badge hespress">هسبريس</span>':''}
-                </div>
+                <h1 class="hero-title">${getTitle(hero)}</h1>
+                <div class="hero-meta"><span><i class="far fa-clock"></i> ${timeAgo(hero.time)}</span><span><i class="far fa-eye"></i> ${(hero.views||0).toLocaleString()}</span>${sourceBadge(hero)}</div>
               </div>
             </div>
-            <div class="hero-sub">
-              ${subHero.map(n=>`<div class="sub-card" onclick="showArticle('${n.id}')">
-                <img src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.src='${getCatImage(n.cat,1)}'"/>
-                <div class="sub-card-body">
-                  <div class="sub-card-cat">${CATEGORIES.find(c=>c.id===n.cat)?.tag||''}</div>
-                  <div class="sub-card-title">${n.title}</div>
-                  <div class="sub-card-meta"><i class="far fa-clock"></i> ${timeAgo(n.time)}</div>
-                </div>
-              </div>`).join('')}
-            </div>
+            <div class="hero-sub">${subHero.map(n=>`<div class="sub-card" onclick="showArticle('${n.id}')"><img src="${n.img}" alt="${getTitle(n)}" loading="lazy" onerror="this.src='${getCatImage(n.cat,1)}'"/><div class="sub-card-body"><div class="sub-card-cat">${CATEGORIES.find(c=>c.id===n.cat)?.tag||''}</div><div class="sub-card-title">${getTitle(n)}</div><div class="sub-card-meta"><i class="far fa-clock"></i> ${timeAgo(n.time)}</div></div></div>`).join('')}</div>
           </div>
         </div>
         <div class="section-white">
-          <div class="section-header">
-            <div class="section-title"><i class="fas fa-bolt" style="color:var(--red)"></i> آخر الأخبار</div>
-            <a href="#" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
-          </div>
-          <div class="news-grid">
-            ${latestGrid.map(n=>`<div class="news-card" onclick="showArticle('${n.id}')">
-              <img class="news-card-img" src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.src='${getCatImage(n.cat,0)}'"/>
-              <div class="news-card-body">
-                <div class="news-card-cat">${CATEGORIES.find(c=>c.id===n.cat)?.tag||''}</div>
-                <div class="news-card-title">${n.title}</div>
-                <div class="news-card-meta">
-                  <span><i class="far fa-clock"></i> ${timeAgo(n.time)}</span>
-                  <span class="news-card-source">${n.sourceLabel||n.source||'maroc.ma'}</span>
-                </div>
-              </div>
-            </div>`).join('')}
-          </div>
+          <div class="section-header"><div class="section-title"><i class="fas fa-bolt" style="color:var(--red)"></i> ${ui.latestNews}</div><a href="#" class="view-all">${ui.viewAll} <i class="fas fa-arrow-left"></i></a></div>
+          <div class="news-grid">${latestGrid.map(n=>`<div class="news-card" onclick="showArticle('${n.id}')"><img class="news-card-img" src="${n.img}" alt="${getTitle(n)}" loading="lazy" onerror="this.src='${getCatImage(n.cat,0)}'"/><div class="news-card-body"><div class="news-card-cat">${CATEGORIES.find(c=>c.id===n.cat)?.tag||''}</div><div class="news-card-title">${getTitle(n)}</div><div class="news-card-meta"><span><i class="far fa-clock"></i> ${timeAgo(n.time)}</span>${sourceBadge(n)}</div></div></div>`).join('')}</div>
         </div>
         ${adSlot('leaderboard','4444444444')}
         ${catSections}
-        ${opinions.length>0?`<div class="section-white">
-          <div class="section-header">
-            <div class="section-title">📝 الرأي والتحليل</div>
-            <a href="#" class="view-all" onclick="navigate('opinion');return false;">عرض الكل <i class="fas fa-arrow-left"></i></a>
-          </div>
-          ${opinions.map(n=>`<div class="opinion-card" onclick="showArticle('${n.id}')">
-            <img class="opinion-avatar" src="${n.img}" alt="${n.author||''}" onerror="this.style.background='var(--red)'"/>
-            <div>
-              <div class="opinion-author">${n.author||'كاتب'}</div>
-              <div class="opinion-role">${n.role||''}</div>
-              <div class="opinion-title">${n.title}</div>
-            </div>
-          </div>`).join('')}
-        </div>`:''}
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px" class="two-col-sec">
-          ${['tech','health'].map(catId=>{
-            const catNews = ALL_NEWS.filter(n=>n.cat===catId).sort((a,b)=>b.time-a.time).slice(0,3);
-            const cat = CATEGORIES.find(c=>c.id===catId);
-            return `<div class="section-white" style="margin-bottom:0">
-              <div class="section-header">
-                <div class="section-title">${catId==='tech'?'💻':'🏥'} ${cat.label}</div>
-                <a href="#" class="view-all" onclick="navigate('${catId}');return false;">الكل</a>
-              </div>
-              ${catNews.map(n=>`<div class="list-card" onclick="showArticle('${n.id}')">
-                <img src="${n.img}" alt="" loading="lazy" onerror="this.src='${getCatImage(catId,0)}'"/>
-                <div class="list-card-body">
-                  <div class="list-card-title">${n.title}</div>
-                  <div class="list-card-meta"><i class="far fa-clock"></i> ${timeAgo(n.time)}</div>
-                </div>
-              </div>`).join('')}
-            </div>`;
-          }).join('')}
-        </div>
-        ${adSlot('leaderboard','5555555555')}
+        ${opinions.length>0?`<div class="section-white"><div class="section-header"><div class="section-title">📝 ${ui.opinion}</div><a href="#" class="view-all" onclick="navigate('opinion');return false;">${ui.viewAll} <i class="fas fa-arrow-left"></i></a></div>${opinions.map(n=>`<div class="opinion-card" onclick="showArticle('${n.id}')"><img class="opinion-avatar" src="${n.img}" alt="${n.author||''}" onerror="this.style.background='var(--red)'"/><div><div class="opinion-author">${n.author||'كاتب'}</div><div class="opinion-role">${n.role||''}</div><div class="opinion-title">${getTitle(n)}</div></div></div>`).join('')}</div>`:''}
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px" class="two-col-sec">${['tech','health'].map(catId=>{const catNews=ALL_NEWS.filter(n=>n.cat===catId).sort((a,b)=>b.time-a.time).slice(0,3);const cat=CATEGORIES.find(c=>c.id===catId);return`<div class="section-white" style="margin-bottom:0"><div class="section-header"><div class="section-title">${catId==='tech'?'💻':'🏥'} ${getCatLabel(cat)}</div><a href="#" class="view-all" onclick="navigate('${catId}');return false;">${ui.viewAll}</a></div>${catNews.map(n=>`<div class="list-card" onclick="showArticle('${n.id}')"><img src="${n.img}" alt="" loading="lazy" onerror="this.src='${getCatImage(catId,0)}'"/><div class="list-card-body"><div class="list-card-title">${getTitle(n)}</div><div class="list-card-meta"><i class="far fa-clock"></i> ${timeAgo(n.time)}</div></div></div>`).join('')}</div>`;}).join('')}</div>
       </div>
       <aside class="sidebar">${buildSidebar()}</aside>
     </div>
-    ${adSlot('leaderboard','6666666666')}
   </div>`;
-  document.getElementById('mainContent').innerHTML = html;
+  document.getElementById('mainContent').innerHTML=html;
 }
 
 // ============================================================
 // CATEGORY PAGE
 // ============================================================
 function renderCategory(catId){
-  const cat = CATEGORIES.find(c=>c.id===catId);
-  if(!cat) return;
-  const catNews = ALL_NEWS.filter(n=>n.cat===catId).sort((a,b)=>b.time-a.time);
-  const bannerImg = cat.banner||getCatImage(catId,0);
-  const html = `<div class="container">
+  const cat=CATEGORIES.find(c=>c.id===catId);if(!cat)return;
+  const ui=UI_TRANSLATIONS[currentLang]||UI_TRANSLATIONS.ar;
+  const catNews=ALL_NEWS.filter(n=>n.cat===catId).sort((a,b)=>b.time-a.time);
+  const bannerImg=cat.banner||getCatImage(catId,0);
+  const html=`<div class="container">
     ${adSlot('leaderboard','7777777777')}
-    <div class="cat-banner" style="margin-top:16px">
-      <img src="${bannerImg}" alt="${cat.label}" onerror="this.src='${getCatImage(catId,0)}'"/>
-      <div class="cat-banner-overlay">
-        <div>
-          <div class="cat-banner-title"><i class="${cat.icon}"></i> ${cat.label}</div>
-          <div class="cat-banner-desc">آخر أخبار ${cat.label} من المغرب والعالم</div>
-        </div>
-      </div>
-    </div>
+    <div class="cat-banner" style="margin-top:16px"><img src="${bannerImg}" alt="${getCatLabel(cat)}" onerror="this.src='${getCatImage(catId,0)}'"/><div class="cat-banner-overlay"><div><div class="cat-banner-title"><i class="${cat.icon}"></i> ${getCatLabel(cat)}</div></div></div></div>
     <div class="page-layout">
       <div>
         <div class="section-white">
-          <div class="section-header">
-            <div class="section-title"><i class="${cat.icon}" style="color:var(--red)"></i> آخر الأخبار</div>
-            <span style="font-size:12px;color:var(--gray)">${catNews.length} خبر</span>
-          </div>
-          <div class="news-grid">
-            ${catNews.length>0?catNews.map(n=>`<div class="news-card" onclick="showArticle('${n.id}')">
-              <img class="news-card-img" src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.src='${getCatImage(catId,0)}'"/>
-              <div class="news-card-body">
-                <div class="news-card-cat">${cat.tag}</div>
-                <div class="news-card-title">${n.title}</div>
-                <div class="news-card-meta">
-                  <span><i class="far fa-clock"></i> ${timeAgo(n.time)}</span>
-                  <span class="news-card-source">${n.sourceLabel||n.source||'maroc.ma'}</span>
-                </div>
-              </div>
-            </div>`).join(''):'<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray)"><i class="fas fa-newspaper" style="font-size:40px;margin-bottom:12px;display:block;opacity:0.3"></i>لا توجد أخبار حالياً</div>'}
-          </div>
+          <div class="section-header"><div class="section-title"><i class="${cat.icon}" style="color:var(--red)"></i> ${ui.latestNews}</div><span style="font-size:12px;color:var(--gray)">${catNews.length} خبر</span></div>
+          <div class="news-grid">${catNews.length>0?catNews.map(n=>`<div class="news-card" onclick="showArticle('${n.id}')"><img class="news-card-img" src="${n.img}" alt="${getTitle(n)}" loading="lazy" onerror="this.src='${getCatImage(catId,0)}'"/><div class="news-card-body"><div class="news-card-cat">${cat.tag}</div><div class="news-card-title">${getTitle(n)}</div><div class="news-card-meta"><span><i class="far fa-clock"></i> ${timeAgo(n.time)}</span>${sourceBadge(n)}</div></div></div>`).join(''):'<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray)"><i class="fas fa-newspaper" style="font-size:40px;margin-bottom:12px;display:block;opacity:0.3"></i>لا توجد أخبار حالياً</div>'}</div>
         </div>
-        ${adSlot('leaderboard','8888888888')}
       </div>
       <aside class="sidebar">${buildSidebar()}</aside>
     </div>
   </div>`;
-  document.getElementById('mainContent').innerHTML = html;
+  document.getElementById('mainContent').innerHTML=html;
 }
 
 // ============================================================
-// ARTICLE PAGE
+// ARTICLE PAGE - with real social sharing that opens apps
 // ============================================================
 function showArticle(id){
-  const article = ALL_NEWS.find(n=>n.id===id);
-  if(!article) return;
-  currentArticle = article;
-  currentPage = 'article';
-  article.views = (article.views||0)+1;
+  const article=ALL_NEWS.find(n=>n.id===id);if(!article)return;
+  currentArticle=article;currentPage='article';
+  article.views=(article.views||0)+1;
   buildNav();
-  const related = ALL_NEWS.filter(n=>n.cat===article.cat&&n.id!==id).slice(0,3);
-  const cat = CATEGORIES.find(c=>c.id===article.cat);
-  const shareUrl = encodeURIComponent(window.location.href);
-  const shareTitle = encodeURIComponent(article.title);
-  const html = `<div class="container">
+  const ui=UI_TRANSLATIONS[currentLang]||UI_TRANSLATIONS.ar;
+  const related=ALL_NEWS.filter(n=>n.cat===article.cat&&n.id!==id).slice(0,3);
+  const cat=CATEGORIES.find(c=>c.id===article.cat);
+
+  // Build the actual sharing URL
+  // Use externalLink if available (from RSS), otherwise use the page title as content
+  const articleUrl=article.externalLink||window.location.href;
+  const articleTitle=getTitle(article);
+
+  // Proper encoded share URLs that open native apps on mobile
+  const fbUrl=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}&quote=${encodeURIComponent(articleTitle)}`;
+  const twUrl=`https://twitter.com/intent/tweet?text=${encodeURIComponent(articleTitle)}&url=${encodeURIComponent(articleUrl)}&hashtags=مشهد_اليوم,أخبار_المغرب`;
+  const waUrl=`https://wa.me/?text=${encodeURIComponent(articleTitle+'\n'+articleUrl)}`;
+  const tgUrl=`https://t.me/share/url?url=${encodeURIComponent(articleUrl)}&text=${encodeURIComponent(articleTitle)}`;
+  const liUrl=`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`;
+  const emUrl=`mailto:?subject=${encodeURIComponent(articleTitle)}&body=${encodeURIComponent('اقرأ هذا الخبر: '+articleTitle+'\n\n'+articleUrl)}`;
+
+  const html=`<div class="container">
     ${adSlot('leaderboard','9999999999')}
     <div class="page-layout">
       <div>
         <div class="section-white">
           <div class="article-page">
-            <div style="margin-bottom:12px">
-              <a href="#" onclick="navigate('${article.cat}');return false;" style="color:var(--red);font-size:13px;font-weight:700"><i class="fas fa-arrow-right"></i> ${cat?.tag||''}</a>
-            </div>
-            <span class="article-cat-badge">${cat?.tag||''}</span>
-            <h1 class="article-title">${article.title}</h1>
+            <div style="margin-bottom:12px"><a href="#" onclick="navigate('${article.cat}');return false;" style="color:var(--red);font-size:13px;font-weight:700"><i class="fas fa-arrow-right"></i> ${getCatLabel(cat)||''}</a></div>
+            <span class="article-cat-badge">${getCatLabel(cat)||''}</span>
+            <h1 class="article-title">${getTitle(article)}</h1>
             <div class="article-meta">
               ${article.author?`<span><i class="fas fa-user"></i> ${article.author}</span>`:''}
               <span><i class="far fa-clock"></i> ${timeAgo(article.time)}</span>
               <span><i class="far fa-eye"></i> ${(article.views||0).toLocaleString()} مشاهدة</span>
               <span class="article-source-box">المصدر: <a href="https://${article.source||'hespress.com'}" target="_blank" rel="noopener">${article.sourceLabel||article.source||'hespress.com'}</a></span>
-              ${article.isHespress?'<span class="source-badge hespress">هسبريس</span>':'<span class="source-badge maroc">maroc.ma</span>'}
+              ${sourceBadge(article)}
             </div>
-            <img src="${article.img}" alt="${article.title}" class="article-hero-img" loading="lazy" onerror="this.src='${getCatImage(article.cat,0)}'"/>
-            <div class="article-body">${article.body||'<p>'+article.title+'</p>'}</div>
+            <img src="${article.img}" alt="${getTitle(article)}" class="article-hero-img" loading="lazy" onerror="this.src='${getCatImage(article.cat,0)}'"/>
+            <div class="article-body">${article.body||'<p>'+getTitle(article)+'</p>'}</div>
+            <!-- REAL SOCIAL SHARING - opens native apps on mobile -->
             <div class="article-share">
-              <strong style="font-size:13px;flex-shrink:0">مشاركة:</strong>
-              <button class="share-btn share-fb" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+${shareUrl})"><i class="fab fa-facebook-f"></i> Facebook</button>
-              <button class="share-btn share-tw" onclick="window.open('https://twitter.com/intent/tweet?text='+${shareTitle})"><i class="fab fa-x-twitter"></i> Twitter</button>
-              <button class="share-btn share-wa" onclick="window.open('https://wa.me/?text='+${shareTitle})"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-              <button class="share-btn share-tg" onclick="window.open('https://t.me/share/url?url='+${shareUrl})"><i class="fab fa-telegram"></i> Telegram</button>
-              <button class="share-btn share-li" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+${shareUrl})"><i class="fab fa-linkedin-in"></i> LinkedIn</button>
-              <button class="share-btn share-em" onclick="window.location='mailto:?subject='+${shareTitle}+'&body='+${shareUrl}"><i class="fas fa-envelope"></i> بريد</button>
-              <button class="share-btn share-cp" onclick="navigator.clipboard.writeText(window.location.href).then(()=>showToast('تم نسخ الرابط'))"><i class="fas fa-copy"></i> نسخ</button>
+              <strong style="font-size:13px;flex-shrink:0">${ui.share}:</strong>
+              <a class="share-btn share-fb" href="${fbUrl}" target="_blank" rel="noopener" title="مشاركة على فيسبوك" onclick="openShare(event,'${fbUrl}')"><i class="fab fa-facebook-f"></i> Facebook</a>
+              <a class="share-btn share-tw" href="${twUrl}" target="_blank" rel="noopener" title="مشاركة على تويتر" onclick="openShare(event,'${twUrl}')"><i class="fab fa-x-twitter"></i> Twitter</a>
+              <a class="share-btn share-wa" href="${waUrl}" target="_blank" rel="noopener" title="مشاركة على واتساب" onclick="openShare(event,'${waUrl}')"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+              <a class="share-btn share-tg" href="${tgUrl}" target="_blank" rel="noopener" title="مشاركة على تيليغرام" onclick="openShare(event,'${tgUrl}')"><i class="fab fa-telegram"></i> Telegram</a>
+              <a class="share-btn share-li" href="${liUrl}" target="_blank" rel="noopener" title="مشاركة على لينكدإن" onclick="openShare(event,'${liUrl}')"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+              <a class="share-btn share-em" href="${emUrl}" title="مشاركة عبر البريد الإلكتروني"><i class="fas fa-envelope"></i> بريد</a>
+              <button class="share-btn share-cp" onclick="copyArticleLink('${encodeURIComponent(articleUrl)}','${encodeURIComponent(articleTitle)}')" style="cursor:pointer"><i class="fas fa-copy"></i> نسخ الرابط</button>
+              ${navigator.share?`<button class="share-btn" style="background:var(--red);cursor:pointer" onclick="nativeShare('${encodeURIComponent(articleTitle)}','${encodeURIComponent(articleUrl)}')"><i class="fas fa-share-alt"></i> مشاركة</button>`:''}
             </div>
           </div>
         </div>
         ${adSlot('leaderboard','aaaaaaaaaa')}
-        ${related.length>0?`<div class="section-white">
-          <div class="section-header">
-            <div class="section-title"><i class="fas fa-newspaper" style="color:var(--red)"></i> أخبار ذات صلة</div>
-          </div>
-          <div class="news-grid">
-            ${related.map(n=>`<div class="news-card" onclick="showArticle('${n.id}')">
-              <img class="news-card-img" src="${n.img}" alt="${n.title}" loading="lazy" onerror="this.src='${getCatImage(n.cat,0)}'"/>
-              <div class="news-card-body">
-                <div class="news-card-cat">${cat?.tag||''}</div>
-                <div class="news-card-title">${n.title}</div>
-                <div class="news-card-meta"><span><i class="far fa-clock"></i> ${timeAgo(n.time)}</span></div>
-              </div>
-            </div>`).join('')}
-          </div>
-        </div>`:''}
+        ${related.length>0?`<div class="section-white"><div class="section-header"><div class="section-title"><i class="fas fa-newspaper" style="color:var(--red)"></i> ${ui.related}</div></div><div class="news-grid">${related.map(n=>`<div class="news-card" onclick="showArticle('${n.id}')"><img class="news-card-img" src="${n.img}" alt="${getTitle(n)}" loading="lazy" onerror="this.src='${getCatImage(n.cat,0)}'"/><div class="news-card-body"><div class="news-card-cat">${getCatLabel(cat)||''}</div><div class="news-card-title">${getTitle(n)}</div><div class="news-card-meta"><span><i class="far fa-clock"></i> ${timeAgo(n.time)}</span></div></div></div>`).join('')}</div></div>`:''}
       </div>
       <aside class="sidebar">${buildSidebar()}</aside>
     </div>
   </div>`;
-  document.getElementById('mainContent').innerHTML = html;
+  document.getElementById('mainContent').innerHTML=html;
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+// Share functions - open native apps
+function openShare(e,url){
+  e.preventDefault();
+  // Open in popup for desktop, direct link for mobile (opens app)
+  const isMobile=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if(isMobile){window.location.href=url;}
+  else{window.open(url,'share','width=580,height=480,scrollbars=yes,resizable=yes');}
+}
+
+function copyArticleLink(encodedUrl,encodedTitle){
+  const url=decodeURIComponent(encodedUrl);
+  const title=decodeURIComponent(encodedTitle);
+  const text=title+'\n'+url;
+  if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>showToast('✅ تم نسخ الرابط والعنوان'));}
+  else{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);showToast('✅ تم نسخ الرابط');}
+}
+
+function nativeShare(encodedTitle,encodedUrl){
+  const title=decodeURIComponent(encodedTitle);
+  const url=decodeURIComponent(encodedUrl);
+  if(navigator.share){
+    navigator.share({title,text:title,url}).catch(()=>{});
+  }
+}
+
 // ============================================================
-// SEARCH
+// SEARCH + SECRET PHRASE
 // ============================================================
 function doSearch(e){
-  if(e) e.preventDefault();
-  const q = (document.getElementById('searchInput').value||'').trim().toLowerCase();
-  if(!q) return false;
-  const results = ALL_NEWS.filter(n=>
-    n.title.toLowerCase().includes(q)||(n.body||'').toLowerCase().includes(q)
-  ).slice(0,20);
-  document.getElementById('searchResultsTitle').textContent = `نتائج البحث عن "${q}" — ${results.length} نتيجة`;
-  const rd = document.getElementById('searchResults');
-  if(!results.length){
-    rd.innerHTML = `<div class="no-results"><i class="fas fa-search" style="font-size:40px;margin-bottom:12px;display:block;opacity:0.2"></i>لا توجد نتائج لـ "${q}"</div>`;
-  } else {
-    rd.innerHTML = results.map(n=>`<div class="search-result-item" onclick="closeSearch();showArticle('${n.id}')">
-      <img src="${n.img}" alt="" loading="lazy" onerror="this.src='${getCatImage(n.cat,0)}'"/>
-      <div>
-        <div class="sri-cat">${CATEGORIES.find(c=>c.id===n.cat)?.tag||''}</div>
-        <div class="sri-title">${n.title}</div>
-        <div class="sri-meta"><i class="far fa-clock"></i> ${timeAgo(n.time)} · ${n.sourceLabel||n.source||''}</div>
-      </div>
-    </div>`).join('');
+  if(e)e.preventDefault();
+  const raw=(document.getElementById('searchInput').value||'').trim();
+  const q=raw.toLowerCase();
+  if(!q)return false;
+  if(raw===SECRET_PHRASE){
+    const adminBtn=document.getElementById('adminBtnTop');
+    if(adminBtn){adminBtn.classList.add('visible');showToast('🔓 تم الكشف عن لوحة التحكم');setTimeout(()=>openAdminModal(),500);}
+    document.getElementById('searchInput').value='';return false;
   }
-  document.getElementById('searchOverlay').classList.add('active');
-  return false;
+  const results=ALL_NEWS.filter(n=>getTitle(n).toLowerCase().includes(q)||n.title.toLowerCase().includes(q)||(n.body||'').toLowerCase().includes(q)).slice(0,20);
+  document.getElementById('searchResultsTitle').textContent=`نتائج البحث عن "${raw}" — ${results.length} نتيجة`;
+  const rd=document.getElementById('searchResults');
+  if(!results.length){rd.innerHTML=`<div class="no-results"><i class="fas fa-search" style="font-size:40px;margin-bottom:12px;display:block;opacity:0.2"></i>لا توجد نتائج لـ "${raw}"</div>`;}
+  else{rd.innerHTML=results.map(n=>`<div class="search-result-item" onclick="closeSearch();showArticle('${n.id}')"><img src="${n.img}" alt="" loading="lazy" onerror="this.src='${getCatImage(n.cat,0)}'"/><div><div class="sri-cat">${CATEGORIES.find(c=>c.id===n.cat)?.tag||''}</div><div class="sri-title">${getTitle(n)}</div><div class="sri-meta"><i class="far fa-clock"></i> ${timeAgo(n.time)} · ${n.sourceLabel||n.source||''}</div></div></div>`).join('');}
+  document.getElementById('searchOverlay').classList.add('active');return false;
 }
-function closeSearch(){ document.getElementById('searchOverlay').classList.remove('active'); }
+function closeSearch(){document.getElementById('searchOverlay').classList.remove('active');}
 
 // ============================================================
 // NAVIGATION
 // ============================================================
-function navigate(page){
-  currentPage = page;
-  buildNav();
-  if(page==='home') renderHome();
-  else if(page==='weather') renderWeatherPage();
-  else if(page==='opinion') renderOpinionPage();
+async function navigate(page){
+  currentPage=page;buildNav();
+  if(currentLang!=='ar'){const untranslated=ALL_NEWS.filter(n=>!n['title_'+currentLang]).slice(0,30);if(untranslated.length>0)translateNewsTitles(currentLang);}
+  if(page==='home')renderHome();
+  else if(page==='weather')renderWeatherPage();
+  else if(page==='opinion')renderOpinionPage();
   else renderCategory(page);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function renderWeatherPage(){
-  const wd = weatherCache[currentWeatherCity];
-  const cityLabel = MOROCCO_CITIES.find(c=>c.id===currentWeatherCity)?.label||currentWeatherCity;
-  const cityBtns = MOROCCO_CITIES.map(c=>`<button style="margin:4px;padding:6px 14px;border-radius:20px;border:2px solid ${c.id===currentWeatherCity?'var(--red)':'var(--border)'};background:${c.id===currentWeatherCity?'var(--red)':'transparent'};color:${c.id===currentWeatherCity?'#fff':'var(--dark)'};font-family:var(--font-main);cursor:pointer;font-size:13px;font-weight:600;transition:all .2s" onclick="changeWeatherCity('${c.id}');document.getElementById('mainContent').innerHTML='';renderWeatherPage();">${c.label}</button>`).join('');
-  
-  let forecastHtml = '';
-  if(wd&&wd.forecast){
-    forecastHtml = `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:14px">
-      ${wd.forecast.map((d,i)=>`<div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:10px 6px;text-align:center;cursor:pointer;border:2px solid ${i===currentWeatherTab?'rgba(255,255,255,0.4)':'transparent'};transition:all .2s" onclick="setWeatherTab(${i});renderWeatherPage()">
-        <div style="font-size:11px;opacity:0.7">${d.day}</div>
-        <div style="font-size:20px;margin:4px 0">${d.icon}</div>
-        <div style="font-size:13px;font-weight:700">${d.max}°</div>
-        <div style="font-size:11px;opacity:0.6">${d.min}°</div>
-      </div>`).join('')}
-    </div>`;
+// ============================================================
+// LANGUAGE SWITCH
+// ============================================================
+async function setLang(lang){
+  if(lang===currentLang)return;
+  currentLang=lang;localStorage.setItem(LS_LANG,lang);
+  document.getElementById('currentLang').textContent=LANG_NAMES[lang]||lang;
+  document.querySelectorAll('.lang-option').forEach(el=>{el.classList.remove('active');if(el.onclick&&el.onclick.toString().includes(`'${lang}'`))el.classList.add('active');});
+  const dirs={ar:'rtl',fr:'ltr',en:'ltr',es:'ltr'};
+  document.getElementById('htmlRoot').dir=dirs[lang]||'rtl';
+  document.getElementById('htmlRoot').lang=lang;
+  if(lang!=='ar'){
+    const overlay=document.getElementById('translateOverlay');
+    const msg=document.getElementById('translateMsg');const sub=document.getElementById('translateSub');
+    overlay.classList.add('active');
+    const langNames={fr:'الفرنسية',en:'الإنجليزية',es:'الإسبانية'};
+    if(msg)msg.textContent=`جاري الترجمة إلى ${langNames[lang]||lang}...`;
+    if(sub)sub.textContent='يرجى الانتظار لحظة';
+    await translateNewsTitles(lang);
+    overlay.classList.remove('active');
   }
-  
-  const tab = wd?.forecast?.[currentWeatherTab]||wd?.forecast?.[0]||{};
-  
-  const html = `<div class="container" style="max-width:900px">
-    ${adSlot('leaderboard','bbbbbbbbbb')}
-    <div style="margin:20px 0">
-      <div class="section-header"><div class="section-title"><i class="fas fa-cloud-sun" style="color:var(--red)"></i> الطقس — المغرب</div></div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px">${cityBtns}</div>
-      ${wd?`<div style="background:linear-gradient(135deg,#0D2B45,#1a4a7a);border-radius:var(--radius-lg);padding:24px;color:#fff;margin-bottom:16px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+  updateDate();buildNav();buildTicker();
+  if(currentPage==='home')renderHome();else navigate(currentPage);
+}
+
+// ============================================================
+// ENHANCED WEATHER PAGE
+// ============================================================
+function renderWeatherPage(){
+  const wd=weatherCache[currentWeatherCity];
+  if(!wd){
+    document.getElementById('mainContent').innerHTML=`<div class="container" style="text-align:center;padding:60px"><i class="fas fa-spinner fa-spin" style="font-size:40px;color:var(--red)"></i><p style="margin-top:16px">جاري تحميل بيانات الطقس...</p></div>`;
+    return;
+  }
+  const cityLabel=MOROCCO_CITIES.find(c=>c.id===currentWeatherCity)?.label||currentWeatherCity;
+  const cityBtns=MOROCCO_CITIES.map(c=>`<button class="weather-city-tab${c.id===currentWeatherCity?' active':''}" onclick="changeWeatherCity('${c.id}');renderWeatherPage();">${c.label}</button>`).join('');
+  const tab=wd.forecast?.[currentWeatherTab]||wd.forecast?.[0]||{};
+  const uvInfo=getUVDesc(wd.uv);
+  const uvPct=Math.min(100,Math.max(0,(parseInt(wd.uv||3)/12)*100));
+
+  // 7-day forecast strip
+  const forecastStrip=(wd.forecast||[]).map((d,i)=>`
+    <div class="forecast-day-card${i===currentWeatherTab?' active':''}" onclick="setWeatherTab(${i});renderWeatherPage()">
+      <div class="forecast-day-name">${d.day.slice(0,3)}</div>
+      <div class="forecast-day-icon">${d.icon}</div>
+      <div class="forecast-max">${d.max}°</div>
+      <div class="forecast-min">${d.min}°</div>
+      <div style="font-size:10px;opacity:0.6;margin-top:3px">${d.chanceRain||'0'}% 🌧</div>
+    </div>`).join('');
+
+  // Hourly forecast
+  const hourlyHtml=(wd.hourly||[]).map(h=>`
+    <div class="hourly-item">
+      <div class="hourly-time">${h.time}</div>
+      <div class="hourly-icon">${h.icon}</div>
+      <div class="hourly-temp">${h.temp}°</div>
+      <div style="font-size:10px;opacity:0.6">${h.humidity}%💧</div>
+    </div>`).join('');
+
+  // Sunrise/sunset SVG arc
+  function timeToMinutes(tStr){
+    if(!tStr)return 0;
+    const m=tStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    if(!m)return 0;
+    let h=parseInt(m[1]);const mn=parseInt(m[2]);const ap=m[3].toUpperCase();
+    if(ap==='PM'&&h!==12)h+=12;if(ap==='AM'&&h===12)h=0;
+    return h*60+mn;
+  }
+  const srMin=timeToMinutes(tab.sunrise||'06:00 AM');
+  const ssMin=timeToMinutes(tab.sunset||'07:30 PM');
+  const nowMin=new Date().getHours()*60+new Date().getMinutes();
+  const dayLen=ssMin-srMin;const elapsed=Math.max(0,Math.min(dayLen,nowMin-srMin));
+  const sunPct=dayLen>0?elapsed/dayLen:0.5;
+  const sunAngle=sunPct*Math.PI;
+  const sunX=50+45*Math.cos(Math.PI-sunAngle);const sunY=50-45*Math.sin(sunAngle);
+
+  // Climate monthly table
+  const CLIMATE_DATA=[
+    {m:'يناير',max:17,min:9,rain:45,sun:6,humidity:80},{m:'فبراير',max:18,min:10,rain:38,sun:7,humidity:77},
+    {m:'مارس',max:21,min:12,rain:35,sun:8,humidity:73},{m:'أبريل',max:23,min:13,rain:25,sun:9,humidity:70},
+    {m:'مايو',max:26,min:16,rain:15,sun:10,humidity:68},{m:'يونيو',max:30,min:19,rain:4,sun:11,humidity:65},
+    {m:'يوليو',max:33,min:21,rain:1,sun:12,humidity:60},{m:'أغسطس',max:33,min:21,rain:2,sun:11,humidity:62},
+    {m:'سبتمبر',max:29,min:19,rain:8,sun:9,humidity:67},{m:'أكتوبر',max:25,min:16,rain:28,sun:8,humidity:72},
+    {m:'نوفمبر',max:21,min:13,rain:48,sun:6,humidity:78},{m:'ديسمبر',max:17,min:10,rain:52,sun:5,humidity:82},
+  ];
+  const climateRows=CLIMATE_DATA.map(m=>{
+    const barW=Math.round((m.max-10)/25*100);
+    return`<tr><td style="font-weight:700">${m.m}</td><td>${m.max}°</td><td>${m.min}°</td><td><div style="background:#eee;border-radius:3px;overflow:hidden;height:8px;min-width:80px"><div style="background:linear-gradient(to right,#3b82f6,#ef4444);width:${barW}%;height:100%"></div></div></td><td>${m.rain}mm</td><td>${m.sun}س</td><td>${m.humidity}%</td></tr>`;
+  }).join('');
+
+  const html=`<div class="container">
+    <div style="margin-top:16px">
+
+      <!-- City selector -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px">
+        <h2 style="font-size:20px;font-weight:900;color:var(--dark);display:flex;align-items:center;gap:8px"><i class="fas fa-cloud-sun" style="color:var(--red)"></i> الطقس — المغرب</h2>
+        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray)"><i class="fas fa-sync-alt"></i> يتحدث كل 30 دقيقة</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px">${cityBtns}</div>
+
+      <!-- MAIN HERO CARD -->
+      <div class="weather-hero" style="margin-bottom:16px">
+        <div class="weather-hero-grid">
           <div>
-            <div style="font-size:15px;font-weight:700;margin-bottom:4px">🇲🇦 ${cityLabel}</div>
-            <div style="font-size:64px;font-weight:900;line-height:1">${wd.temp}<span style="font-size:28px">°م</span></div>
-            <div style="font-size:15px;opacity:0.8;margin-top:4px">${wd.desc}</div>
+            <div style="font-size:14px;opacity:0.7;margin-bottom:6px">🇲🇦 ${cityLabel}</div>
+            <div class="weather-main-temp">${wd.temp}<sup>°م</sup></div>
+            <div class="weather-main-desc">${wd.desc}</div>
+            <div style="font-size:13px;opacity:0.7;margin-bottom:16px">يُحسّ: ${wd.feelsLike}° — ${new Date().toLocaleDateString('ar-MA',{weekday:'long',day:'numeric',month:'long'})}</div>
+            <div class="weather-main-stats">
+              <div class="weather-stat-box"><div class="weather-stat-val">${wd.humidity}%</div><div class="weather-stat-lbl"><i class="fas fa-tint"></i> رطوبة</div></div>
+              <div class="weather-stat-box"><div class="weather-stat-val">${wd.wind}</div><div class="weather-stat-lbl"><i class="fas fa-wind"></i> km/h ريح ${wd.windDir||''}</div></div>
+              <div class="weather-stat-box"><div class="weather-stat-val">${wd.visibility}</div><div class="weather-stat-lbl"><i class="fas fa-eye"></i> km رؤية</div></div>
+            </div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;min-width:200px">
-            <div style="background:rgba(255,255,255,0.1);border-radius:6px;padding:8px;font-size:12px"><i class="fas fa-tint"></i> رطوبة: ${wd.humidity}%</div>
-            <div style="background:rgba(255,255,255,0.1);border-radius:6px;padding:8px;font-size:12px"><i class="fas fa-wind"></i> ريح: ${wd.wind}km/h</div>
-            <div style="background:rgba(255,255,255,0.1);border-radius:6px;padding:8px;font-size:12px"><i class="fas fa-thermometer-half"></i> يُحسّ: ${wd.feelsLike}°</div>
-            <div style="background:rgba(255,255,255,0.1);border-radius:6px;padding:8px;font-size:12px"><i class="fas fa-eye"></i> رؤية: ${wd.visibility}km</div>
+          <div>
+            <!-- 7-Day forecast in hero -->
+            <div class="forecast-strip">${forecastStrip}</div>
           </div>
         </div>
-        ${forecastHtml}
-        ${tab.day?`<div style="margin-top:14px;background:rgba(255,255,255,0.08);border-radius:8px;padding:14px">
-          <div style="font-weight:700;margin-bottom:8px">${tab.day} — تفاصيل</div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
-            <div style="text-align:center"><div style="opacity:0.7;font-size:11px">صباحاً</div><div style="font-size:18px;font-weight:700">${tab.morning}°</div></div>
-            <div style="text-align:center"><div style="opacity:0.7;font-size:11px">ظهراً</div><div style="font-size:18px;font-weight:700">${tab.afternoon}°</div></div>
-            <div style="text-align:center"><div style="opacity:0.7;font-size:11px">مساءً</div><div style="font-size:18px;font-weight:700">${tab.evening}°</div></div>
+        ${hourlyHtml?`<div style="margin-top:16px"><div style="font-size:12px;opacity:0.7;margin-bottom:8px;font-weight:700">🕐 توقعات ساعة بساعة (اليوم)</div><div class="hourly-scroll">${hourlyHtml}</div></div>`:''}
+      </div>
+
+      <!-- DETAIL CARDS GRID -->
+      <div class="weather-detail-grid">
+        <div class="weather-detail-card">
+          <div class="wdc-icon">🌡️</div>
+          <div class="wdc-val">${tab.afternoon||wd.temp}°</div>
+          <div class="wdc-lbl">أعلى درجة الحرارة</div>
+          <div class="wdc-sub">دنيا: ${tab.min||'--'}°م</div>
+        </div>
+        <div class="weather-detail-card">
+          <div class="wdc-icon">💧</div>
+          <div class="wdc-val">${wd.humidity}%</div>
+          <div class="wdc-lbl">الرطوبة النسبية</div>
+          <div class="wdc-sub">نقطة الندى: ${wd.dewPoint||'--'}°</div>
+        </div>
+        <div class="weather-detail-card">
+          <div class="wdc-icon">🌬️</div>
+          <div class="wdc-val">${wd.wind} <span style="font-size:14px">km/h</span></div>
+          <div class="wdc-lbl">سرعة الرياح</div>
+          <div class="wdc-sub">الاتجاه: ${wd.windDir||'شمال غرب'}</div>
+        </div>
+        <div class="weather-detail-card">
+          <div class="wdc-icon">📊</div>
+          <div class="wdc-val">${wd.pressure||'1013'} <span style="font-size:12px">hPa</span></div>
+          <div class="wdc-lbl">الضغط الجوي</div>
+          <div class="wdc-sub">الغيوم: ${wd.cloudcover||'--'}%</div>
+        </div>
+        <div class="weather-detail-card">
+          <div class="wdc-icon" style="font-size:22px">☀️</div>
+          <div class="wdc-val" style="color:${uvInfo.color}">${wd.uv||'3'}</div>
+          <div class="wdc-lbl">مؤشر الأشعة فوق البنفسجية</div>
+          <div class="wdc-sub" style="color:${uvInfo.color};font-weight:700">${uvInfo.label}</div>
+          <div class="uv-bar" style="margin-top:8px">
+            <div class="uv-indicator" style="left:${uvPct}%"></div>
           </div>
-        </div>`:''}
-      </div>`:'<div style="text-align:center;padding:40px"><i class="fas fa-spinner fa-spin" style="font-size:30px;color:var(--gray)"></i><p style="margin-top:12px;color:var(--gray)">جاري تحميل بيانات الطقس...</p></div>'}
+        </div>
+        <div class="weather-detail-card">
+          <div class="wdc-icon">🌧️</div>
+          <div class="wdc-val">${tab.chanceRain||'0'}%</div>
+          <div class="wdc-lbl">احتمال الهطول</div>
+          <div class="wdc-sub">${parseInt(tab.chanceRain||0)>50?'يُنصح بحمل مظلة':'جو جيد للتنقل'}</div>
+        </div>
+        <div class="weather-detail-card">
+          <div class="wdc-icon">🌅</div>
+          <div class="wdc-val" style="font-size:16px">${tab.sunrise||'06:30 AM'}</div>
+          <div class="wdc-lbl">شروق الشمس</div>
+          <div class="wdc-sub">الغروب: ${tab.sunset||'07:15 PM'}</div>
+        </div>
+        <div class="weather-detail-card">
+          <div class="wdc-icon">🌙</div>
+          <div class="wdc-val" style="font-size:16px">${tab.moonrise||'09:00 PM'}</div>
+          <div class="wdc-lbl">شروق القمر</div>
+          <div class="wdc-sub">${tab.moonPhase||'تربيع أول'}</div>
+        </div>
+      </div>
+
+      <!-- SUNRISE/SUNSET ARC -->
+      <div class="sun-arc-wrap">
+        <div class="sun-arc-title"><i class="fas fa-sun" style="color:#f59e0b"></i> منحنى الشمس — ${cityLabel}</div>
+        <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;display:block;margin:0 auto">
+          <defs>
+            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#87ceeb" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#ffd700" stop-opacity="0.05"/>
+            </linearGradient>
+          </defs>
+          <path d="M5,50 A45,45 0 0,1 95,50" fill="url(#skyGrad)" stroke="#f59e0b" stroke-width="0.8" stroke-dasharray="2,2"/>
+          <line x1="5" y1="50" x2="95" y2="50" stroke="#e2e8f0" stroke-width="0.5"/>
+          <!-- Sun position -->
+          <circle cx="${sunX.toFixed(1)}" cy="${sunY.toFixed(1)}" r="3" fill="#f59e0b" filter="url(#glow)"/>
+          <circle cx="${sunX.toFixed(1)}" cy="${sunY.toFixed(1)}" r="5" fill="rgba(245,158,11,0.2)"/>
+          <!-- Labels -->
+          <text x="5" y="56" font-size="4" fill="#94a3b8" text-anchor="middle">${tab.sunrise||'06:30'}</text>
+          <text x="50" y="7" font-size="4" fill="#f59e0b" text-anchor="middle">الذروة</text>
+          <text x="95" y="56" font-size="4" fill="#94a3b8" text-anchor="middle">${tab.sunset||'19:15'}</text>
+        </svg>
+        <div style="display:flex;justify-content:space-around;margin-top:12px;font-size:13px">
+          <div style="text-align:center"><div style="font-size:20px">🌅</div><div style="font-weight:700">${tab.sunrise||'06:30 AM'}</div><div style="color:var(--gray);font-size:11px">شروق الشمس</div></div>
+          <div style="text-align:center"><div style="font-size:20px">☀️</div><div style="font-weight:700">${Math.floor((srMin+dayLen/2)/60)}:${String(Math.round((srMin+dayLen/2)%60)).padStart(2,'0')}</div><div style="color:var(--gray);font-size:11px">الذروة</div></div>
+          <div style="text-align:center"><div style="font-size:20px">🌇</div><div style="font-weight:700">${tab.sunset||'07:15 PM'}</div><div style="color:var(--gray);font-size:11px">غروب الشمس</div></div>
+          <div style="text-align:center"><div style="font-size:20px">🕐</div><div style="font-weight:700">${Math.floor(dayLen/60)}س ${dayLen%60}د</div><div style="color:var(--gray);font-size:11px">طول النهار</div></div>
+        </div>
+      </div>
+
+      <!-- AQI WIDGET -->
+      <div class="aqi-widget" style="margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+          <div>
+            <div style="font-size:13px;opacity:0.8;margin-bottom:4px"><i class="fas fa-leaf"></i> جودة الهواء — ${cityLabel}</div>
+            <div class="aqi-val">48</div>
+            <div class="aqi-label">جيد ✅</div>
+            <div style="font-size:12px;opacity:0.75;margin-top:6px">لا توجد مخاطر صحية مرئية</div>
+          </div>
+          <div style="flex:1;min-width:200px">
+            <div style="font-size:12px;opacity:0.7;margin-bottom:10px">مستوى التلوث:</div>
+            <div class="aqi-bars">
+              <div class="aqi-bar active" style="background:#4caf50" title="جيد"></div>
+              <div class="aqi-bar" style="background:#8bc34a" title="مقبول"></div>
+              <div class="aqi-bar" style="background:#ffeb3b" title="غير صحي للحساسين"></div>
+              <div class="aqi-bar" style="background:#ff9800" title="غير صحي"></div>
+              <div class="aqi-bar" style="background:#f44336" title="خطير جداً"></div>
+              <div class="aqi-bar" style="background:#9c27b0" title="خطير"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px">
+              <div style="background:rgba(255,255,255,0.1);border-radius:6px;padding:8px;font-size:11px"><div style="font-weight:700">PM2.5</div><div>12 μg/m³</div></div>
+              <div style="background:rgba(255,255,255,0.1);border-radius:6px;padding:8px;font-size:11px"><div style="font-weight:700">PM10</div><div>28 μg/m³</div></div>
+              <div style="background:rgba(255,255,255,0.1);border-radius:6px;padding:8px;font-size:11px"><div style="font-weight:700">CO₂</div><div>415 ppm</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SELECTED DAY DETAIL -->
+      <div class="section-white">
+        <div class="section-header"><div class="section-title"><i class="fas fa-calendar-day" style="color:var(--red)"></i> تفاصيل يوم ${tab.day||AR_DAYS[new Date().getDay()]}</div></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
+          <div style="background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(147,197,253,0.1));border-radius:10px;padding:16px;text-align:center;border:1px solid rgba(59,130,246,0.15)">
+            <div style="font-size:24px;margin-bottom:6px">🌅</div>
+            <div style="font-size:18px;font-weight:900">${tab.morning||'--'}°</div>
+            <div style="font-size:12px;color:var(--gray)">صباحاً (6-12)</div>
+          </div>
+          <div style="background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(252,211,77,0.1));border-radius:10px;padding:16px;text-align:center;border:1px solid rgba(245,158,11,0.15)">
+            <div style="font-size:24px;margin-bottom:6px">☀️</div>
+            <div style="font-size:18px;font-weight:900">${tab.afternoon||'--'}°</div>
+            <div style="font-size:12px;color:var(--gray)">ظهراً (12-18)</div>
+          </div>
+          <div style="background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(167,139,250,0.1));border-radius:10px;padding:16px;text-align:center;border:1px solid rgba(99,102,241,0.15)">
+            <div style="font-size:24px;margin-bottom:6px">🌆</div>
+            <div style="font-size:18px;font-weight:900">${tab.evening||'--'}°</div>
+            <div style="font-size:12px;color:var(--gray)">مساءً (18-24)</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+          <div style="display:flex;justify-content:space-between;padding:10px;background:var(--bg);border-radius:8px;font-size:13px"><span><i class="fas fa-tint" style="color:#3b82f6"></i> احتمال الهطول</span><span style="font-weight:700">${tab.chanceRain||'0'}%</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px;background:var(--bg);border-radius:8px;font-size:13px"><span><i class="fas fa-wind" style="color:#64748b"></i> سرعة الريح</span><span style="font-weight:700">${tab.wind||'--'} km/h</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px;background:var(--bg);border-radius:8px;font-size:13px"><span><i class="fas fa-tint" style="color:#06b6d4"></i> الرطوبة</span><span style="font-weight:700">${tab.humidity||'--'}%</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px;background:var(--bg);border-radius:8px;font-size:13px"><span><i class="fas fa-moon" style="color:#8b5cf6"></i> مرحلة القمر</span><span style="font-weight:700">${tab.moonPhase||'--'}</span></div>
+        </div>
+      </div>
+
+      <!-- MONTHLY CLIMATE TABLE -->
+      <div class="section-white">
+        <div class="section-header"><div class="section-title"><i class="fas fa-table" style="color:var(--red)"></i> المناخ الشهري — ${cityLabel}</div></div>
+        <div style="overflow-x:auto">
+          <table class="climate-table">
+            <thead><tr><th>الشهر</th><th>أعلى °م</th><th>أدنى °م</th><th>مقياس الحرارة</th><th>هطول</th><th>أشمس</th><th>رطوبة</th></tr></thead>
+            <tbody>${climateRows}</tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- WEATHER TIPS -->
+      <div class="section-white">
+        <div class="section-header"><div class="section-title"><i class="fas fa-lightbulb" style="color:var(--red)"></i> نصائح الطقس اليوم</div></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+          ${parseInt(wd.uv||3)>5?'<div style="background:#fff8e1;border:1px solid #ffd54f;border-radius:8px;padding:12px;font-size:13px"><div style="font-size:20px;margin-bottom:4px">🧴</div><div style="font-weight:700">واقي الشمس ضروري</div><div style="color:var(--gray);margin-top:4px">مؤشر UV مرتفع، استخدم واقي شمس SPF 50+</div></div>':'<div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:12px;font-size:13px"><div style="font-size:20px;margin-bottom:4px">😊</div><div style="font-weight:700">طقس لطيف</div><div style="color:var(--gray);margin-top:4px">جو مناسب للأنشطة الخارجية</div></div>'}
+          ${parseInt(tab.chanceRain||0)>40?'<div style="background:#e3f2fd;border:1px solid #90caf9;border-radius:8px;padding:12px;font-size:13px"><div style="font-size:20px;margin-bottom:4px">☂️</div><div style="font-weight:700">احتمال مطر</div><div style="color:var(--gray);margin-top:4px">يُنصح بحمل مظلة أو معطف واقٍ</div></div>':'<div style="background:#f1f8e9;border:1px solid #c5e1a5;border-radius:8px;padding:12px;font-size:13px"><div style="font-size:20px;margin-bottom:4px">✅</div><div style="font-weight:700">لا مطر متوقع</div><div style="color:var(--gray);margin-top:4px">جو جيد بدون هطول</div></div>'}
+          ${parseInt(wd.wind||0)>30?'<div style="background:#fce4ec;border:1px solid #f48fb1;border-radius:8px;padding:12px;font-size:13px"><div style="font-size:20px;margin-bottom:4px">💨</div><div style="font-weight:700">رياح قوية</div><div style="color:var(--gray);margin-top:4px">انتبه عند القيادة وتأمين الأشياء الخفيفة</div></div>':'<div style="background:#f3e5f5;border:1px solid #ce93d8;border-radius:8px;padding:12px;font-size:13px"><div style="font-size:20px;margin-bottom:4px">🍃</div><div style="font-weight:700">نسيم خفيف</div><div style="color:var(--gray);margin-top:4px">رياح معتدلة مريحة</div></div>'}
+        </div>
+      </div>
+
     </div>
   </div>`;
-  document.getElementById('mainContent').innerHTML = html;
+  document.getElementById('mainContent').innerHTML=html;
 }
 
 function renderOpinionPage(){
-  const opinions = ALL_NEWS.filter(n=>n.cat==='opinion');
-  const cat = CATEGORIES.find(c=>c.id==='opinion');
-  const html = `<div class="container">
-    ${adSlot('leaderboard','cccccccccc')}
-    <div class="cat-banner" style="margin-top:16px">
-      <img src="${cat.banner}" alt="الرأي"/>
-      <div class="cat-banner-overlay"><div><div class="cat-banner-title"><i class="${cat.icon}"></i> ${cat.label}</div></div></div>
-    </div>
-    <div class="page-layout">
-      <div>
-        <div class="section-white">
-          ${opinions.map(n=>`<div class="opinion-card" onclick="showArticle('${n.id}')">
-            <img class="opinion-avatar" src="${n.img}" alt="" onerror="this.style.background='var(--red)'"/>
-            <div>
-              <div class="opinion-author">${n.author||'كاتب رأي'}</div>
-              <div class="opinion-role">${n.role||''}</div>
-              <div class="opinion-title">${n.title}</div>
-              <div style="font-size:11px;color:var(--gray-light);margin-top:5px"><i class="far fa-clock"></i> ${timeAgo(n.time)}</div>
-            </div>
-          </div>`).join('')||'<div style="padding:40px;text-align:center;color:var(--gray)">لا توجد مقالات رأي حالياً</div>'}
-        </div>
-      </div>
-      <aside class="sidebar">${buildSidebar()}</aside>
-    </div>
-  </div>`;
-  document.getElementById('mainContent').innerHTML = html;
+  const ui=UI_TRANSLATIONS[currentLang]||UI_TRANSLATIONS.ar;
+  const opinions=ALL_NEWS.filter(n=>n.cat==='opinion');
+  const cat=CATEGORIES.find(c=>c.id==='opinion');
+  const html=`<div class="container">${adSlot('leaderboard','cccccccccc')}<div class="cat-banner" style="margin-top:16px"><img src="${cat.banner}" alt="الرأي"/><div class="cat-banner-overlay"><div><div class="cat-banner-title"><i class="${cat.icon}"></i> ${ui.opinion}</div></div></div></div><div class="page-layout"><div><div class="section-white">${opinions.map(n=>`<div class="opinion-card" onclick="showArticle('${n.id}')"><img class="opinion-avatar" src="${n.img}" alt="" onerror="this.style.background='var(--red)'"/><div><div class="opinion-author">${n.author||'كاتب رأي'}</div><div class="opinion-role">${n.role||''}</div><div class="opinion-title">${getTitle(n)}</div><div style="font-size:11px;color:var(--gray-light);margin-top:5px"><i class="far fa-clock"></i> ${timeAgo(n.time)}</div></div></div>`).join('')||'<div style="padding:40px;text-align:center;color:var(--gray)">لا توجد مقالات رأي حالياً</div>'}</div></div><aside class="sidebar">${buildSidebar()}</aside></div></div>`;
+  document.getElementById('mainContent').innerHTML=html;
 }
 
 // ============================================================
 // ADMIN
 // ============================================================
-function openAdminModal(){
-  document.getElementById('adminModal').classList.add('active');
-  document.getElementById('adminErr').textContent='';
-  document.getElementById('adminUser').value='';
-  document.getElementById('adminPass').value='';
-}
-function closeAdminModal(){ document.getElementById('adminModal').classList.remove('active'); }
-
+function openAdminModal(){document.getElementById('adminModal').classList.add('active');document.getElementById('adminErr').textContent='';document.getElementById('adminUser').value='';document.getElementById('adminPass').value='';}
+function closeAdminModal(){document.getElementById('adminModal').classList.remove('active');}
 function doAdminLogin(){
-  const u = document.getElementById('adminUser').value.trim();
-  const p = document.getElementById('adminPass').value;
-  if(u===ADMIN_USER && p===ADMIN_PASS){
-    adminLoggedIn = true;
-    localStorage.setItem(LS_ADMIN_SES,'1');
-    closeAdminModal();
-    showAdminDashboard();
-  } else {
-    document.getElementById('adminErr').textContent = 'بيانات دخول خاطئة. حاول مرة أخرى.';
-    document.getElementById('adminPass').value='';
-  }
+  const u=document.getElementById('adminUser').value.trim();const p=document.getElementById('adminPass').value;
+  if(u===ADMIN_USER&&p===ADMIN_PASS){adminLoggedIn=true;localStorage.setItem(LS_ADMIN_SES,'1');closeAdminModal();showAdminDashboard();}
+  else{document.getElementById('adminErr').textContent='بيانات دخول خاطئة.';document.getElementById('adminPass').value='';}
 }
-
 function showAdminDashboard(){
-  const dash = document.getElementById('adminDash');
-  dash.classList.add('active');
-  document.getElementById('dashWelcome').textContent = 'مرحباً بك في لوحة التحكم';
-  updateDashStats();
-  renderManageList();
-  // Load settings
-  const s = getSettings();
-  document.getElementById('settingBreaking').value = s.breakingText||'';
-  document.getElementById('settingAdsense').value = s.adsensePid||'';
-  document.getElementById('weatherDefaultCity').value = s.defaultCity||'Rabat';
+  document.getElementById('adminDash').classList.add('active');
+  document.getElementById('dashWelcome').textContent='مرحباً بك في لوحة التحكم';
+  updateDashStats();renderManageList();
+  const s=getSettings();
+  document.getElementById('settingBreaking').value=s.breakingText||'';
+  document.getElementById('settingAdsense').value=s.adsensePid||'';
+  document.getElementById('weatherDefaultCity').value=s.defaultCity||'Rabat';
 }
-
 function closeAdminDash(){
   document.getElementById('adminDash').classList.remove('active');
-  localStorage.removeItem(LS_ADMIN_SES);
-  adminLoggedIn = false;
+  localStorage.removeItem(LS_ADMIN_SES);adminLoggedIn=false;
+  const adminBtn=document.getElementById('adminBtnTop');if(adminBtn)adminBtn.classList.remove('visible');
 }
-
 function updateDashStats(){
-  document.getElementById('statTotal').textContent = ALL_NEWS.length;
-  document.getElementById('statHespress').textContent = ALL_NEWS.filter(n=>n.isHespress).length;
-  try{
-    const custom = JSON.parse(localStorage.getItem(LS_CUSTOM)||'[]');
-    document.getElementById('statCustom').textContent = custom.length;
-  }catch(e){}
-  const today = new Date(); today.setHours(0,0,0,0);
-  document.getElementById('statToday').textContent = ALL_NEWS.filter(n=>n.time>=today.getTime()).length;
+  document.getElementById('statTotal').textContent=ALL_NEWS.length;
+  document.getElementById('statHespress').textContent=ALL_NEWS.filter(n=>n.isExternal||n.isHespress).length;
+  try{const custom=JSON.parse(localStorage.getItem(LS_CUSTOM)||'[]');document.getElementById('statCustom').textContent=custom.length;}catch(e){}
+  const today=new Date();today.setHours(0,0,0,0);
+  document.getElementById('statToday').textContent=ALL_NEWS.filter(n=>n.time>=today.getTime()).length;
 }
-
-function showDashPanel(id){
+function showDashPanel(id,event){
   document.querySelectorAll('.dash-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.dash-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
-  event.target.classList.add('active');
-  if(id==='manage') renderManageList();
+  if(event&&event.target)event.target.classList.add('active');
+  if(id==='manage')renderManageList();
 }
-
 function resetNewsForm(){
-  document.getElementById('editNewsId').value='';
-  document.getElementById('editNewsTitle').textContent='إضافة خبر جديد';
+  document.getElementById('editNewsId').value='';document.getElementById('editNewsTitle').textContent='إضافة خبر جديد';
   ['newsTitle','newsSource','newsImg','newsBody','newsAuthor','newsRole'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('newsCat').value='morocco';
-  document.getElementById('newsSource').value='hespress.com';
+  document.getElementById('newsCat').value='morocco';document.getElementById('newsSource').value='hespress.com';
 }
-
 function saveNews(){
-  const id = document.getElementById('editNewsId').value||('custom_'+Date.now());
-  const title = document.getElementById('newsTitle').value.trim();
-  if(!title){ alert('يرجى إدخال عنوان الخبر'); return; }
-  const cat = document.getElementById('newsCat').value;
-  const source = document.getElementById('newsSource').value||'hespress.com';
-  const img = document.getElementById('newsImg').value||getCatImage(cat,0);
-  const body = document.getElementById('newsBody').value||'<p>'+title+'</p>';
-  const author = document.getElementById('newsAuthor').value;
-  const role = document.getElementById('newsRole').value;
-  const news = {id,cat,title,img,body,source,author,role,time:Date.now(),views:0,isCustom:true};
-  // Update in ALL_NEWS
-  const idx = ALL_NEWS.findIndex(n=>n.id===id);
-  if(idx>=0) ALL_NEWS[idx]=news; else ALL_NEWS.unshift(news);
-  // Save to localStorage
-  try{
-    let custom = JSON.parse(localStorage.getItem(LS_CUSTOM)||'[]');
-    const ci = custom.findIndex(n=>n.id===id);
-    if(ci>=0) custom[ci]=news; else custom.unshift(news);
-    localStorage.setItem(LS_CUSTOM, JSON.stringify(custom));
-  }catch(e){}
-  resetNewsForm();
-  updateDashStats();
-  renderManageList();
-  buildTicker();
-  showToast('تم حفظ الخبر بنجاح');
+  const id=document.getElementById('editNewsId').value||('custom_'+Date.now());
+  const title=document.getElementById('newsTitle').value.trim();
+  if(!title){alert('يرجى إدخال عنوان الخبر');return;}
+  const cat=document.getElementById('newsCat').value;const source=document.getElementById('newsSource').value||'hespress.com';
+  const img=document.getElementById('newsImg').value||getCatImage(cat,0);
+  const body=document.getElementById('newsBody').value||'<p>'+title+'</p>';
+  const author=document.getElementById('newsAuthor').value;const role=document.getElementById('newsRole').value;
+  const news={id,cat,title,img,body,source,author,role,time:Date.now(),views:0,isCustom:true};
+  const idx=ALL_NEWS.findIndex(n=>n.id===id);
+  if(idx>=0)ALL_NEWS[idx]=news;else ALL_NEWS.unshift(news);
+  try{let custom=JSON.parse(localStorage.getItem(LS_CUSTOM)||'[]');const ci=custom.findIndex(n=>n.id===id);if(ci>=0)custom[ci]=news;else custom.unshift(news);localStorage.setItem(LS_CUSTOM,JSON.stringify(custom));}catch(e){}
+  resetNewsForm();updateDashStats();renderManageList();buildTicker();showToast('تم حفظ الخبر بنجاح');
 }
-
 function editNews(id){
-  const n = ALL_NEWS.find(x=>x.id===id);
-  if(!n) return;
-  document.getElementById('editNewsId').value = n.id;
-  document.getElementById('editNewsTitle').textContent = 'تعديل الخبر';
-  document.getElementById('newsTitle').value = n.title;
-  document.getElementById('newsCat').value = n.cat;
-  document.getElementById('newsSource').value = n.source||'hespress.com';
-  document.getElementById('newsImg').value = n.img||'';
-  document.getElementById('newsBody').value = n.body||'';
-  document.getElementById('newsAuthor').value = n.author||'';
-  document.getElementById('newsRole').value = n.role||'';
-  showDashPanel('add');
-  document.querySelectorAll('.dash-tab')[0].click();
+  const n=ALL_NEWS.find(x=>x.id===id);if(!n)return;
+  document.getElementById('editNewsId').value=n.id;document.getElementById('editNewsTitle').textContent='تعديل الخبر';
+  document.getElementById('newsTitle').value=n.title;document.getElementById('newsCat').value=n.cat;
+  document.getElementById('newsSource').value=n.source||'hespress.com';document.getElementById('newsImg').value=n.img||'';
+  document.getElementById('newsBody').value=n.body||'';document.getElementById('newsAuthor').value=n.author||'';
+  document.getElementById('newsRole').value=n.role||'';
+  document.querySelectorAll('.dash-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.dash-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-add').classList.add('active');
+  document.querySelectorAll('.dash-tab')[0].classList.add('active');
 }
-
 function deleteNews(id){
-  if(!confirm('هل أنت متأكد من حذف هذا الخبر?')) return;
-  ALL_NEWS = ALL_NEWS.filter(n=>n.id!==id);
-  try{
-    let custom = JSON.parse(localStorage.getItem(LS_CUSTOM)||'[]');
-    custom = custom.filter(n=>n.id!==id);
-    localStorage.setItem(LS_CUSTOM, JSON.stringify(custom));
-    let hesp = JSON.parse(localStorage.getItem(LS_HESP_CACHE)||'[]');
-    hesp = hesp.filter(n=>n.id!==id);
-    localStorage.setItem(LS_HESP_CACHE, JSON.stringify(hesp));
-  }catch(e){}
-  updateDashStats();
-  renderManageList();
-  buildTicker();
-  showToast('تم حذف الخبر');
+  if(!confirm('هل أنت متأكد من حذف هذا الخبر?'))return;
+  ALL_NEWS=ALL_NEWS.filter(n=>n.id!==id);
+  try{let custom=JSON.parse(localStorage.getItem(LS_CUSTOM)||'[]');custom=custom.filter(n=>n.id!==id);localStorage.setItem(LS_CUSTOM,JSON.stringify(custom));let hesp=JSON.parse(localStorage.getItem(LS_HESP_CACHE)||'[]');hesp=hesp.filter(n=>n.id!==id);localStorage.setItem(LS_HESP_CACHE,JSON.stringify(hesp));}catch(e){}
+  updateDashStats();renderManageList();buildTicker();showToast('تم حذف الخبر');
 }
-
 function renderManageList(){
-  const container = document.getElementById('manageList');
-  if(!container) return;
-  const q = (document.getElementById('manageSearch')?.value||'').toLowerCase();
-  const items = ALL_NEWS.filter(n=>!q||n.title.toLowerCase().includes(q)).slice(0,50);
-  container.innerHTML = items.map(n=>`<div class="news-manage-item">
-    <img class="news-manage-img" src="${n.img}" alt="" onerror="this.src='${getCatImage(n.cat,0)}'"/>
-    <div class="news-manage-title">
-      ${n.title}
-      <div class="news-manage-meta">${CATEGORIES.find(c=>c.id===n.cat)?.tag||n.cat} · ${n.sourceLabel||n.source||''} · ${timeAgo(n.time)}</div>
-    </div>
-    <div class="news-manage-actions">
-      <button class="btn-edit" onclick="editNews('${n.id}')"><i class="fas fa-edit"></i></button>
-      <button class="btn-danger" onclick="deleteNews('${n.id}')"><i class="fas fa-trash"></i></button>
-    </div>
-  </div>`).join('');
+  const container=document.getElementById('manageList');if(!container)return;
+  const q=(document.getElementById('manageSearch')?.value||'').toLowerCase();
+  const items=ALL_NEWS.filter(n=>!q||n.title.toLowerCase().includes(q)).slice(0,50);
+  container.innerHTML=items.map(n=>`<div class="news-manage-item"><img class="news-manage-img" src="${n.img}" alt="" onerror="this.src='${getCatImage(n.cat,0)}'"/><div class="news-manage-title">${n.title}<div class="news-manage-meta">${CATEGORIES.find(c=>c.id===n.cat)?.tag||n.cat} · ${n.sourceLabel||n.source||''} · ${timeAgo(n.time)}</div></div><div class="news-manage-actions"><button class="btn-edit" onclick="editNews('${n.id}')"><i class="fas fa-edit"></i></button><button class="btn-danger" onclick="deleteNews('${n.id}')"><i class="fas fa-trash"></i></button></div></div>`).join('');
 }
-
 function saveWeatherSettings(){
-  const city = document.getElementById('weatherDefaultCity').value;
-  const s = getSettings();
-  s.defaultCity = city;
-  saveSettingsData(s);
-  currentWeatherCity = city;
-  fetchWeather(city).then(wd=>{ weatherCache[city]=wd; });
-  showToast('تم حفظ إعدادات الطقس');
+  const city=document.getElementById('weatherDefaultCity').value;
+  const s=getSettings();s.defaultCity=city;saveSettingsData(s);
+  currentWeatherCity=city;fetchWeather(city).then(wd=>{weatherCache[city]=wd;});showToast('تم حفظ إعدادات الطقس');
 }
-
 function saveSettings(){
-  const s = getSettings();
-  s.breakingText = document.getElementById('settingBreaking').value;
-  s.adsensePid = document.getElementById('settingAdsense').value;
-  saveSettingsData(s);
-  if(s.breakingText) buildTicker();
-  showToast('تم حفظ الإعدادات');
+  const s=getSettings();s.breakingText=document.getElementById('settingBreaking').value;s.adsensePid=document.getElementById('settingAdsense').value;
+  saveSettingsData(s);if(s.breakingText)buildTicker();showToast('تم حفظ الإعدادات');
 }
 
 // ============================================================
-// LANG / DARK / SIDEBAR NAV
+// DARK MODE / SIDEBAR
 // ============================================================
-function setLang(lang){
-  currentLang = lang;
-  const labels = {ar:'العربية',fr:'Français',en:'English',es:'Español'};
-  document.getElementById('currentLang').textContent = labels[lang];
-  const dirs = {ar:'rtl',fr:'ltr',en:'ltr',es:'ltr'};
-  document.getElementById('htmlRoot').dir = dirs[lang];
-  document.getElementById('htmlRoot').lang = lang;
-  updateDate();
-  if(currentPage==='home') renderHome();
-  else navigate(currentPage);
-}
-
 function toggleDark(){
   document.body.classList.toggle('dark');
-  document.getElementById('darkIcon').className = document.body.classList.contains('dark')?'fas fa-sun':'fas fa-moon';
-  localStorage.setItem('ain_dark', document.body.classList.contains('dark')?'1':'0');
+  document.getElementById('darkIcon').className=document.body.classList.contains('dark')?'fas fa-sun':'fas fa-moon';
+  localStorage.setItem('mashhad_dark',document.body.classList.contains('dark')?'1':'0');
 }
-
-function openSidebarNav(){
-  document.getElementById('sidebarNav').classList.add('open');
-  document.getElementById('overlayBg').classList.add('show');
-  document.body.style.overflow='hidden';
-}
-function closeSidebarNav(){
-  document.getElementById('sidebarNav').classList.remove('open');
-  document.getElementById('overlayBg').classList.remove('show');
-  document.body.style.overflow='';
-}
+function openSidebarNav(){document.getElementById('sidebarNav').classList.add('open');document.getElementById('overlayBg').classList.add('show');document.body.style.overflow='hidden';}
+function closeSidebarNav(){document.getElementById('sidebarNav').classList.remove('open');document.getElementById('overlayBg').classList.remove('show');document.body.style.overflow='';}
 
 // ============================================================
 // TOAST
 // ============================================================
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 3000);
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+
+// ============================================================
+// ANIMATED BACKGROUND - Breaking News Themed Canvas
+// ============================================================
+function initAnimatedBackground(){
+  const canvas=document.getElementById('bgCanvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+
+  // News-themed floating elements: news print dots, headlines bars, signal pulses
+  const elements=[];
+  const themes=[
+    // Headline bar shapes
+    {type:'headline',color:'rgba(200,16,46,',w:60,h:3,opacity:0.04},
+    {type:'headline',color:'rgba(200,16,46,',w:40,h:2,opacity:0.03},
+    {type:'headline',color:'rgba(13,43,69,',w:80,h:4,opacity:0.03},
+    // Dot matrix (like newsprint)
+    {type:'dot',color:'rgba(200,16,46,',r:2,opacity:0.05},
+    {type:'dot',color:'rgba(13,43,69,',r:1.5,opacity:0.04},
+    // Signal ring
+    {type:'ring',color:'rgba(200,16,46,',opacity:0.04},
+  ];
+
+  for(let i=0;i<50;i++){
+    const t=themes[Math.floor(Math.random()*themes.length)];
+    elements.push({
+      ...t,
+      x:Math.random()*window.innerWidth,
+      y:Math.random()*window.innerHeight,
+      vx:(Math.random()-0.5)*0.3,
+      vy:-Math.random()*0.5-0.1,
+      rotate:Math.random()*Math.PI*2,
+      vr:(Math.random()-0.5)*0.005,
+      alpha:Math.random()*t.opacity,
+      maxAlpha:t.opacity,
+      ringR:0,
+      ringMax:100+Math.random()*150,
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    elements.forEach(el=>{
+      ctx.save();
+      ctx.globalAlpha=el.alpha;
+      ctx.translate(el.x,el.y);
+      ctx.rotate(el.rotate);
+
+      if(el.type==='headline'){
+        ctx.fillStyle=el.color+el.alpha+')';
+        ctx.fillRect(-el.w/2,-el.h/2,el.w,el.h);
+        // Second smaller line below
+        ctx.globalAlpha=el.alpha*0.5;
+        ctx.fillRect(-el.w*0.6/2,el.h/2+3,el.w*0.6,el.h*0.7);
+      } else if(el.type==='dot'){
+        ctx.beginPath();ctx.arc(0,0,el.r,0,Math.PI*2);
+        ctx.fillStyle=el.color+el.alpha+')';ctx.fill();
+      } else if(el.type==='ring'){
+        if(el.ringR>0){
+          ctx.beginPath();ctx.arc(0,0,el.ringR,0,Math.PI*2);
+          ctx.strokeStyle=el.color+(el.alpha*(1-el.ringR/el.ringMax))+')';
+          ctx.lineWidth=1;ctx.stroke();
+        }
+      }
+      ctx.restore();
+
+      el.x+=el.vx;el.y+=el.vy;el.rotate+=el.vr;
+      if(el.type==='ring'){el.ringR+=0.8;if(el.ringR>el.ringMax)el.ringR=0;}
+      if(el.y<-50){el.y=canvas.height+50;el.x=Math.random()*canvas.width;}
+      if(el.x<-150)el.x=canvas.width+150;
+      if(el.x>canvas.width+150)el.x=-150;
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // Animated horizontal news-ticker-like lines
+  const bgNewsLines=document.getElementById('bgNewsLines');
+  if(bgNewsLines){
+    for(let i=0;i<5;i++){
+      const line=document.createElement('div');
+      line.className='bg-news-line';
+      line.style.top=(12+i*20)+'%';
+      line.style.animationDelay=(i*3.2)+'s';
+      line.style.animationDuration=(10+i*2)+'s';
+      bgNewsLines.appendChild(line);
+    }
+  }
 }
 
 // ============================================================
 // INIT
 // ============================================================
 async function init(){
-  // Dark mode
-  if(localStorage.getItem('ain_dark')==='1') document.body.classList.add('dark');
-
+  if(localStorage.getItem('mashhad_dark')==='1')document.body.classList.add('dark');
+  const savedLang=localStorage.getItem(LS_LANG);
+  if(savedLang&&savedLang!=='ar'){
+    currentLang=savedLang;
+    document.getElementById('currentLang').textContent=LANG_NAMES[savedLang]||savedLang;
+    const dirs={ar:'rtl',fr:'ltr',en:'ltr',es:'ltr'};
+    document.getElementById('htmlRoot').dir=dirs[savedLang]||'rtl';
+    document.getElementById('htmlRoot').lang=savedLang;
+  }
   initNews();
-  updateDate();
-  buildNav();
-  buildTicker();
+  updateDate();buildNav();buildTicker();
+  initAnimatedBackground();
 
-  // Fetch weather for default city
-  const s = getSettings();
-  currentWeatherCity = s.defaultCity||'Rabat';
-  fetchWeather(currentWeatherCity).then(wd=>{
-    weatherCache[currentWeatherCity] = wd;
-    renderHome();
-  });
-
+  const s=getSettings();currentWeatherCity=s.defaultCity||'Rabat';
+  fetchWeather(currentWeatherCity).then(wd=>{weatherCache[currentWeatherCity]=wd;renderHome();refreshSidebar();});
   renderHome();
 
-  // Start Hespress polling
-  fetchHespress();
-  setInterval(fetchHespress, HESPRESS_INTERVAL);
-
-  // Update date every minute
-  setInterval(updateDate, 60000);
-
-  // Auto-refresh weather
-  setInterval(()=>{
-    fetchWeather(currentWeatherCity).then(wd=>{
-      weatherCache[currentWeatherCity]=wd;
-      if(currentPage==='home'||currentPage==='weather') refreshSidebar();
+  // Pre-fetch other cities in background
+  setTimeout(()=>{
+    ['Casablanca','Marrakech','Fes'].forEach(city=>{
+      fetchWeather(city).then(wd=>{weatherCache[city]=wd;});
     });
-  }, WEATHER_INTERVAL);
+  },5000);
 
-  // Scroll events
+  // Start RSS polling
+  fetchAllSources();
+  setInterval(fetchAllSources,HESPRESS_INTERVAL);
+
+  // Weather refresh
+  setInterval(()=>{fetchWeather(currentWeatherCity).then(wd=>{weatherCache[currentWeatherCity]=wd;if(currentPage==='home'||currentPage==='weather'){refreshSidebar();if(currentPage==='weather')renderWeatherPage();}});},WEATHER_INTERVAL);
+
+  setInterval(updateDate,60000);
+
   window.addEventListener('scroll',()=>{
-    const btn = document.getElementById('scrollTop');
-    const bar = document.getElementById('readingBar');
-    const sy = window.scrollY;
-    const th = document.documentElement.scrollHeight - window.innerHeight;
-    if(btn) btn.classList.toggle('show', sy>400);
-    if(bar) bar.style.width = th>0?(sy/th*100)+'%':'0%';
+    const btn=document.getElementById('scrollTop');const bar=document.getElementById('readingBar');
+    const sy=window.scrollY;const th=document.documentElement.scrollHeight-window.innerHeight;
+    if(btn)btn.classList.toggle('show',sy>400);
+    if(bar)bar.style.width=th>0?(sy/th*100)+'%':'0%';
   });
 
-  // Responsive two-col
-  function fixLayout(){
-    document.querySelectorAll('.two-col-sec').forEach(el=>{
-      el.style.gridTemplateColumns = window.innerWidth<768?'1fr':'1fr 1fr';
-    });
-  }
-  window.addEventListener('resize', fixLayout);
-  fixLayout();
+  function fixLayout(){document.querySelectorAll('.two-col-sec').forEach(el=>{el.style.gridTemplateColumns=window.innerWidth<768?'1fr':'1fr 1fr';});}
+  window.addEventListener('resize',fixLayout);fixLayout();
 
-  // Close search on ESC
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){
-      closeSearch();
-      closeSidebarNav();
-      closeAdminModal();
-    }
-  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closeSidebarNav();closeAdminModal();}});
+  document.getElementById('searchOverlay').addEventListener('click',function(e){if(e.target===this)closeSearch();});
 
-  // Close search overlay on click outside
-  document.getElementById('searchOverlay').addEventListener('click',function(e){
-    if(e.target===this) closeSearch();
-  });
+  if(localStorage.getItem(LS_ADMIN_SES)==='1'){const adminBtn=document.getElementById('adminBtnTop');if(adminBtn)adminBtn.classList.add('visible');}
+  if(currentLang!=='ar')translateNewsTitles(currentLang);
 }
 
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded',init);
 </script>
 </body>
 </html>
